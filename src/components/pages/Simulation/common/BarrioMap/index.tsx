@@ -4,15 +4,18 @@ import {
     GeoJSONWithInteractionsProps,
 } from "./GeoJSONWithInteractions";
 
-export type BarrioMapProps = GeoJSONWithInteractionsProps;
+interface BarrioMapProps extends GeoJSONWithInteractionsProps {
+    className?: string;
+}
 
 export function BarrioMap({
+    className,
     onSelectBarrio,
     selectedBarrio,
     colorScheme = "primary",
 }: BarrioMapProps) {
     return (
-        <div className="rounded-lg overflow-hidden shadow mb-6">
+        <div className="rounded-lg overflow-hidden shadow">
             <MapContainer
                 center={[39.4699, -0.3763] as L.LatLngExpression}
                 zoom={13}

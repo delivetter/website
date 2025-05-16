@@ -8,84 +8,47 @@ import {
     FaMapMarkerAlt,
     FaMoneyBillWave,
     FaPlayCircle,
+    FaRobot,
+    FaTruck,
 } from "react-icons/fa";
 import MiniBarrioMap from "./MiniBarrioMap";
 import { SimulationsTabContentProps } from "../common/types/props";
 import React, { useState } from "react";
 import { Coordinates } from "@/lib/types/coordinates";
-import { Neighborhood } from "@/lib/neighborhoods";
+import { Neighborhood, StartPoint, Warehouse } from "@/lib/neighborhoods";
 import { ModelsObject } from "../common/types/models";
+import { simulate, SimulateOutput } from "@/lib/api/simulate";
+import { cn } from "@/lib/utils";
+import { ResultMapPreview } from "./ResultMapPreview";
+import { motion } from "framer-motion";
 
-type ModelSimulationResult = {
-    time: number;
-    emissions: number;
-    cost: number;
-};
-
-type SimulationResult = ModelsObject<ModelSimulationResult>;
-
-const handleRunSimulation = async (
-    e: React.FormEvent,
-    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
-    setSimulationResult: React.Dispatch<
-        React.SetStateAction<SimulationResult | null>
-    >,
-    selectedNeighborhood: Neighborhood | null,
-    startPoint: Coordinates | null,
-    selectedWarehouse: Coordinates | null,
-    selectedPackageQty: number | null
-) => {
-    e.preventDefault();
-    setIsLoading(true);
-
-    try {
-        const response = await fetch("/simulate", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                barrio: selectedNeighborhood!.barrio,
-                nodo_entrada: [startPoint!.lat, startPoint!.lon],
-                almacen: [selectedWarehouse!.lat, selectedWarehouse!.lon],
-                paquetes: selectedPackageQty,
-            }),
-        });
-
-        if (!response.ok) throw new Error("Error en la simulación");
-
-        const data = await response.json();
-        setSimulationResult(data); // puedes dividirlo en dos si quieres M1 y M2 separados
-    } catch (err) {
-        console.error("❌ Error en la simulación:", err);
-    } finally {
-        setIsLoading(false);
-    }
-};
+interface InteractiveSimulationsTabContentProps
+    extends SimulationsTabContentProps {
+    startPoint: StartPoint | null;
+    selectedWarehouse: Warehouse | null;
+}
 
 export function InteractiveSimulationsTabContent({
     selectedNeighborhood,
     setSelectedNeighborhood,
     selectedPackageQty,
     setSelectedPackageQty,
+    startPoint,
+    selectedWarehouse,
     neighborhoods,
-}: SimulationsTabContentProps) {
+}: InteractiveSimulationsTabContentProps) {
     const [isLoading, setIsLoading] = useState(false);
-    const [startPoint, setStartPoint] = useState<Coordinates | null>(null);
-    const [selectedWarehouse, setSelectedWarehouse] =
-        useState<Coordinates | null>(null);
     const [simulationResult, setSimulationResult] =
-        useState<SimulationResult | null>(null);
+        useState<SimulateOutput | null>(null);
 
     return (
-        <TabsContent value="interactive" className="tab-content">
-            <div className="simulation-card p-6 mb-8 bg-gradient-to-br from-gray-50 to-white">
-                <BarrioMap
-                    onSelectBarrio={(name) =>
-                        setSelectedNeighborhood(neighborhoods[name])
-                    }
-                    selectedBarrio={selectedNeighborhood?.barrio}
-                    colorScheme="green"
-                />
-
+        <TabsContent
+            value="interactive"
+            className="focus:outline-none py-4 transition-all duration-500 ease-in-out"
+        >
+            <div
+                className={`bg-white rounded-lg shadow-md transition-all duration-300 border-l-4 overflow-hidden border-secondary hover:shadow-lg hover:transform hover:-translate-y-1 p-6 mb-8`}
+            >
                 <div className="flex items-center mb-4">
                     <FaPlayCircle className="text-2xl text-secondary mr-3" />
                     <h2 className="text-xl font-semibold">
@@ -96,23 +59,9 @@ export function InteractiveSimulationsTabContent({
                     Select a neighborhood and explore different delivery
                     scenarios with custom package volumes.
                 </p>
-                {selectedNeighborhood && (
-                    <div className="mb-6">
-                        <label className="text-sm font-medium text-gray-700 mb-2 block">
-                            Select Start Point
-                        </label>
-                        <MiniBarrioMap
-                            selectedBarrio={selectedNeighborhood}
-                            startPoint={startPoint}
-                            setStartPoint={setStartPoint}
-                            selectedWarehouse={selectedWarehouse}
-                            setSelectedWarehouse={setSelectedWarehouse}
-                        />
-                    </div>
-                )}
                 <form
                     onSubmit={(e) =>
-                        handleRunSimulation(
+                        simulate(
                             e,
                             setIsLoading,
                             setSimulationResult,
@@ -206,7 +155,8 @@ export function InteractiveSimulationsTabContent({
                                 className="w-full accent-secondary"
                             />
                             <div className="text-center text-sm text-gray-700 mt-2">
-                                Selected: <strong>{selectedPackageQty || 1}</strong>{" "}
+                                Selected:{" "}
+                                <strong>{selectedPackageQty || 1}</strong>{" "}
                                 packages
                             </div>
                         </div>
@@ -215,7 +165,13 @@ export function InteractiveSimulationsTabContent({
                     <div className="flex justify-center">
                         <button
                             type="submit"
-                            className="submit-button px-6 py-3 bg-secondary text-white rounded-md hover:bg-secondary-dark focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 flex items-center shadow-md"
+                            disabled={
+                                !selectedNeighborhood ||
+                                !selectedPackageQty ||
+                                !selectedWarehouse ||
+                                !startPoint
+                            }
+                            className="submit-button px-6 py-3 bg-secondary text-white rounded-md hover:bg-secondary-dark focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 flex items-center shadow-md disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
                         >
                             <FaPlayCircle className="mr-2" />
                             {isLoading ? "Processing..." : "Run Simulation"}
@@ -223,20 +179,81 @@ export function InteractiveSimulationsTabContent({
                     </div>
                 </form>
                 {simulationResult && (
-                    <div className="mt-6 bg-white p-4 rounded-md shadow">
-                        <h3 className="font-bold text-lg mb-3">
-                            Resultados modelo M1
+                    <div>
+                        <h3 className="text-lg font-semibold mb-4 border-b pb-2">
+                            Simulation Results
                         </h3>
-                        <pre className="text-sm text-gray-700">
-                            {JSON.stringify(simulationResult.M1, null, 2)}
-                        </pre>
 
-                        <h3 className="font-bold text-lg mt-6 mb-3">
-                            Resultados modelo M2
-                        </h3>
-                        <pre className="text-sm text-gray-700">
-                            {JSON.stringify(simulationResult.M2, null, 2)}
-                        </pre>
+                        <div className="flex flex-row gap-x-6 mt-6 bg-white p-4 rounded-md shadow">
+                            
+                            <div className="h-full flex flex-col gap-4  p-4 rounded-lg shadow-sm border border-gray-100 w-1/2 items-center">
+                                <motion.div
+                                    className="flex items-center"
+                                    initial={{
+                                        x: -30,
+                                        opacity: 0,
+                                    }}
+                                    animate={{
+                                        x: 0,
+                                        opacity: 1,
+                                    }}
+                                    transition={{
+                                        duration: 0.5,
+                                        delay: 0.2,
+                                    }}
+                                >
+                                    <div className="bg-gray-700 p-4 rounded-full mr-5 shadow-lg">
+                                        <FaTruck className="text-3xl text-white" />
+                                    </div>
+                                    <div>
+                                        <h2 className="text-3xl font-bold text-gray-700">
+                                            Traditional Delivery
+                                        </h2>
+                                        <p className="text-gray-700">
+                                            Human-driven vehicles
+                                        </p>
+                                    </div>
+                                </motion.div>
+                                <ResultMapPreview
+                                    html={simulationResult.m1.map_html}
+                                    className="w-full h-[500px]"
+                                />
+                            </div>
+
+                            <div className="flex flex-col gap-4 bg-gradient-to-r from-blue-500 to-purple-500 p-4 rounded-lg shadow-sm border border-gray-100 w-1/2 items-center">
+                                <motion.div
+                                    className="flex items-center"
+                                    initial={{
+                                        x: 30,
+                                        opacity: 0,
+                                    }}
+                                    animate={{
+                                        x: 0,
+                                        opacity: 1,
+                                    }}
+                                    transition={{
+                                        duration: 0.5,
+                                        delay: 0.2,
+                                    }}
+                                >
+                                    <div className="bg-white p-4 rounded-full mr-5 shadow-lg">
+                                        <FaRobot className="text-3xl text-purple-600" />
+                                    </div>
+                                    <div>
+                                        <h2 className="text-3xl font-bold text-white">
+                                            Autonomous Delivery
+                                        </h2>
+                                        <p className="text-purple-100">
+                                            AI-powered robots
+                                        </p>
+                                    </div>
+                                </motion.div>
+                                <ResultMapPreview
+                                    html={simulationResult.m2.map_html}
+                                    className="w-full h-[500px]"
+                                />
+                            </div>
+                        </div>
                     </div>
                 )}
 
@@ -256,47 +273,6 @@ export function InteractiveSimulationsTabContent({
                             Complete the form and click "Run Simulation" to see
                             the results.
                         </p>
-                        <p className="text-xs text-gray-500 mt-2">
-                            (This is a demonstration - actual API connection
-                            will be implemented in the final version)
-                        </p>
-                    </div>
-                )}
-
-                {!isLoading && simulationResult && (
-                    <div className="mt-8 border-t border-gray-200 pt-6">
-                        <h3 className="text-lg font-semibold mb-4 text-center">
-                            Simulation Results
-                        </h3>
-                        <div className="grid md:grid-cols-3 gap-6">
-                            <div className="bg-blue-50 p-5 rounded-lg border border-blue-100 text-center shadow-sm">
-                                <FaClock className="text-primary text-2xl mx-auto mb-2" />
-                                <div className="text-sm text-gray-500 mb-1">
-                                    Delivery Time
-                                </div>
-                                <div className="text-2xl font-bold text-primary">
-                                    {simulationResult.M1.time} min
-                                </div>
-                            </div>
-                            <div className="bg-green-50 p-5 rounded-lg border border-green-100 text-center shadow-sm">
-                                <FaLeaf className="text-green-500 text-2xl mx-auto mb-2" />
-                                <div className="text-sm text-gray-500 mb-1">
-                                    CO2 Emissions
-                                </div>
-                                <div className="text-2xl font-bold text-green-500">
-                                    {simulationResult.M1.emissions} g
-                                </div>
-                            </div>
-                            <div className="bg-yellow-50 p-5 rounded-lg border border-yellow-100 text-center shadow-sm">
-                                <FaMoneyBillWave className="text-yellow-500 text-2xl mx-auto mb-2" />
-                                <div className="text-sm text-gray-500 mb-1">
-                                    Operational Cost
-                                </div>
-                                <div className="text-2xl font-bold text-yellow-500">
-                                    {simulationResult.M1.cost} €
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 )}
             </div>

@@ -4,10 +4,18 @@ import { puntosPerifericosPromise } from "../data/puntosPerifericos";
 import { barriosGeoJSONPromise } from "../data/barriosGeoJSON";
 import { Coordinates } from "../types/coordinates";
 
+export interface StartPoint extends Coordinates {
+    id: number;
+}
+
+export interface Warehouse extends Coordinates {
+    id: string;
+}
+
 export type Neighborhood = {
     barrio: string;
-    almacenes_locations: Coordinates[];
-    puntos_perifericos_locations: Coordinates[];
+    almacenes_locations: Warehouse[];
+    puntos_perifericos_locations: StartPoint[];
     almacenes_barrio: number;
     comercios_barrio: number;
     cids_barrio: number;
@@ -61,7 +69,7 @@ export const getNeighborhoods = async () => {
                 ({ lon, lat }) => lon === row.x && lat === row.y
             )
         ) {
-            barrio.almacenes_locations.push({ lon: row.x, lat: row.y });
+            barrio.almacenes_locations.push({ id: row.id, lon: row.x, lat: row.y });
         }
     }
 
@@ -73,6 +81,7 @@ export const getNeighborhoods = async () => {
             )
         ) {
             barrio.puntos_perifericos_locations.push({
+                id: row.id,
                 lon: row.x,
                 lat: row.y,
             });

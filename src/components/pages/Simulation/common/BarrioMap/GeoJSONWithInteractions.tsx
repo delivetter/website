@@ -13,12 +13,12 @@ export interface GeoJSONWithInteractionsProps {
     colorScheme?: "primary" | "secondary";
 }
 
-const defaultStyle = {
+const defaultStyle = (colorScheme: string) => ({
     weight: 1,
     color: "#666",
-    fillColor: "#f0f0f0",
-    fillOpacity: 0.3,
-};
+    fillColor: colorScheme === "primary" ? "#3B82F6" : "#15803D",
+    fillOpacity: 0.1,
+});
 
 const hoverStyle = (colorScheme: string) => ({
     weight: 2,
@@ -58,9 +58,9 @@ export function GeoJSONWithInteractions({
                 if (layer && layer.feature && layer.feature.properties) {
                     const featureName = layer.feature.properties.nombre;
                     if (featureName === selectedBarrio) {
-                        layer.setStyle(selectedStyle);
+                        layer.setStyle(selectedStyle(colorScheme));
                     } else {
-                        layer.setStyle(defaultStyle);
+                        layer.setStyle(defaultStyle(colorScheme));
                     }
                 }
             });
@@ -90,7 +90,7 @@ export function GeoJSONWithInteractions({
                 // Al quitar el ratón, restaura el estilo original
                 mouseout: () => {
                     if (name !== selectedBarrio) {
-                        layer.setStyle(defaultStyle);
+                        layer.setStyle(defaultStyle(colorScheme));
                     } else {
                         layer.setStyle(selectedStyle(colorScheme));
                     }
@@ -115,11 +115,11 @@ export function GeoJSONWithInteractions({
             barriosGeoJSON,
             {
                 style: (feature) => {
-                    if (!feature || !feature.properties) return defaultStyle;
+                    if (!feature || !feature.properties) return defaultStyle(colorScheme);
                     const name = feature.properties.nombre;
                     return name === selectedBarrio
                         ? selectedStyle(colorScheme)
-                        : defaultStyle;
+                        : defaultStyle(colorScheme);
                 },
                 onEachFeature: onEachFeature,
             }

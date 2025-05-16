@@ -2,16 +2,11 @@ export default function MapLegend() {
     return (
         <div
             style={{
-                position: "absolute",
-                top: 10,
-                right: 10,
-                background: "white",
+                height: "auto",
                 padding: "10px 14px",
                 borderRadius: "8px",
-                boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
-                fontSize: "0.85rem",
+                fontSize: "0.8rem",
                 lineHeight: "1.5",
-                zIndex: 1000,
             }}
         >
             <div style={{ marginBottom: 6 }}>

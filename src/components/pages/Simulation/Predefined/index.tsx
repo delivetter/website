@@ -82,19 +82,13 @@ export function PredefinedSimulationsTabContent({
     ]);
 
     return (
-        <TabsContent value="predefined" className="tab-content">
+        <TabsContent
+            value="predefined"
+            className="focus:outline-none py-4 transition-all duration-500 ease-in-out"
+        >
             <div
                 className={`bg-white rounded-lg shadow-md transition-all duration-300 border-l-4 overflow-hidden border-primary hover:shadow-lg hover:transform hover:-translate-y-1 p-6 mb-8`}
             >
-                {selectedNeighborhood && (
-                    <BarrioMap
-                        onSelectBarrio={(name) =>
-                            setSelectedNeighborhood(neighborhoods[name])
-                        }
-                        selectedBarrio={selectedNeighborhood.barrio}
-                    />
-                )}
-
                 <div className="flex items-center mb-4">
                     {true ? (
                         <FaTruck className="text-2xl text-primary mr-3" />
@@ -232,12 +226,16 @@ export function PredefinedSimulationsTabContent({
 
                         {(predefinedSimulationSelectedResults?.M1 ||
                             predefinedSimulationSelectedResults?.M2) && (
-                            <div className="simulation-results">
+                            <div>
                                 <h3 className="text-lg font-semibold mb-4 border-b pb-2">
                                     Simulation Results
                                 </h3>
                                 <div className="flex flex-row gap-6">
-                                    <div className="flex flex-col gap-4 model-traditional p-4 rounded-lg shadow-sm border border-gray-100 w-1/2 items-center">
+                                    <div className="absolute inset-0 overflow-hidden">
+                                        <div className="absolute top-0 right-0 w-64 h-64 bg-gray-400 rounded-full blur-3xl opacity-30 -mr-20 -mt-20"></div>
+                                        <div className="absolute bottom-0 left-0 w-64 h-64 bg-gray-300 rounded-full blur-3xl opacity-20 -ml-10 -mb-10"></div>
+                                    </div>
+                                    <div className="relative z-10 h-full flex flex-col gap-4  p-4 rounded-lg shadow-sm border border-gray-100 w-1/2 items-center">
                                         <motion.div
                                             className="flex items-center"
                                             initial={{
@@ -253,14 +251,14 @@ export function PredefinedSimulationsTabContent({
                                                 delay: 0.2,
                                             }}
                                         >
-                                            <div className="bg-white p-4 rounded-full mr-5 shadow-lg">
-                                                <FaTruck className="text-3xl text-red-600" />
+                                            <div className="bg-gray-700 p-4 rounded-full mr-5 shadow-lg">
+                                                <FaTruck className="text-3xl text-white" />
                                             </div>
                                             <div>
-                                                <h2 className="text-3xl font-bold text-white">
+                                                <h2 className="text-3xl font-bold text-gray-700">
                                                     Traditional Delivery
                                                 </h2>
-                                                <p className="text-blue-100">
+                                                <p className="text-gray-700">
                                                     Human-driven vehicles
                                                 </p>
                                             </div>
@@ -372,7 +370,7 @@ export function PredefinedSimulationsTabContent({
                                                         title="View detailed cost breakdown"
                                                     >
                                                         <FaInfo className="mr-1" />{" "}
-                                                        Detailed costs
+                                                        Details of costs
                                                     </Link>
                                                 </div>
                                                 <div className="space-y-3">
@@ -413,7 +411,8 @@ export function PredefinedSimulationsTabContent({
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="flex flex-col gap-4 model-autonomous p-4 rounded-lg shadow-sm border border-gray-100 w-1/2 items-center">
+
+                                    <div className="flex flex-col gap-4 bg-gradient-to-r from-blue-500 to-purple-500 p-4 rounded-lg shadow-sm border border-gray-100 w-1/2 items-center">
                                         <motion.div
                                             className="flex items-center"
                                             initial={{
@@ -430,7 +429,7 @@ export function PredefinedSimulationsTabContent({
                                             }}
                                         >
                                             <div className="bg-white p-4 rounded-full mr-5 shadow-lg">
-                                                <FaRobot className="text-3xl text-green-600" />
+                                                <FaRobot className="text-3xl text-purple-600" />
                                             </div>
                                             <div>
                                                 <h2 className="text-3xl font-bold text-white">
@@ -548,7 +547,7 @@ export function PredefinedSimulationsTabContent({
                                                         title="View detailed cost breakdown"
                                                     >
                                                         <FaInfo className="mr-1" />{" "}
-                                                        Detailed costs
+                                                        Details of costs
                                                     </Link>
                                                 </div>
                                                 <div className="space-y-3">

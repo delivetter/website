@@ -2,60 +2,58 @@ import { useEffect, useRef } from "react";
 import { CircleMarker, MapContainer, TileLayer, useMap } from "react-leaflet";
 import SetupMapPane from "./SetupMapPane";
 import MapLegend from "./MapLegend";
-import { Neighborhood } from "@/lib/neighborhoods";
+import { Neighborhood, StartPoint, Warehouse } from "@/lib/neighborhoods";
 import L from "leaflet";
 
+interface MiniBarrioMapProps {
+    className?: string;
+    selectedBarrio: Neighborhood;
+    startPoint: StartPoint | null;
+    setStartPoint: React.Dispatch<React.SetStateAction<StartPoint | null>>;
+    selectedWarehouse: Warehouse | null;
+    setSelectedWarehouse: React.Dispatch<
+        React.SetStateAction<Warehouse | null>
+    >;
+}
+
 export default function MiniBarrioMap({
+    className,
     selectedBarrio,
     startPoint,
     setStartPoint,
     selectedWarehouse,
     setSelectedWarehouse,
-}: {
-    selectedBarrio: Neighborhood;
-    startPoint: { lat: number; lon: number } | null;
-    setStartPoint: React.Dispatch<
-        React.SetStateAction<{ lat: number; lon: number } | null>
-    >;
-    selectedWarehouse: { lat: number; lon: number } | null;
-    setSelectedWarehouse: React.Dispatch<
-        React.SetStateAction<{ lat: number; lon: number } | null>
-    >;
-}) {
+}: MiniBarrioMapProps) {
     const mapRef = useRef<L.Map | null>(null);
     const layerRef = useRef<L.GeoJSON | null>(null);
 
-    const selectedFeature = selectedBarrio.geoJSONFeature;
-
     // Pintar el barrio y centrar
     useEffect(() => {
-        if (!mapRef.current || !selectedFeature) return;
+        const selectedFeature = selectedBarrio.geoJSONFeature;
 
-        setTimeout(() => {
-            if (!mapRef.current) return;
+        if (!mapRef.current) return;
 
-            // ✅ Solo quitamos el layer si existe y está en el mapa
-            if (layerRef.current && mapRef.current.hasLayer(layerRef.current)) {
-                mapRef.current.removeLayer(layerRef.current);
-            }
+        // ✅ Solo quitamos el layer si existe y está en el mapa
+        if (layerRef.current && mapRef.current.hasLayer(layerRef.current)) {
+            mapRef.current.removeLayer(layerRef.current);
+        }
 
-            const newLayer = L.geoJSON(selectedFeature, {
-                style: {
-                    color: "#15803D",
-                    weight: 3,
-                    fillColor: "#BBF7D0",
-                    fillOpacity: 0.5,
-                },
-            });
+        const newLayer = L.geoJSON(selectedFeature, {
+            style: {
+                color: "#15803D",
+                weight: 3,
+                fillColor: "#BBF7D0",
+                fillOpacity: 0.5,
+            },
+        });
 
-            newLayer.addTo(mapRef.current);
-            layerRef.current = newLayer;
+        newLayer.addTo(mapRef.current);
+        layerRef.current = newLayer;
 
-            mapRef.current.fitBounds(newLayer.getBounds(), {
-                padding: [10, 10],
-            });
-        }, 0);
-    }, [selectedBarrio.barrio, selectedFeature]);
+        mapRef.current.fitBounds(newLayer.getBounds(), {
+            padding: [10, 10],
+        });
+    }, [mapRef, selectedBarrio]);
 
     useEffect(() => {
         const style = document.createElement("style");
@@ -77,11 +75,12 @@ export default function MiniBarrioMap({
     }, []);
 
     return (
-        <div style={{ position: "relative" }}>
+        <div className="h-full flex flex-col gap-y-5">
+            <MapLegend />
             <MapContainer
-                zoom={15}
+                className={className}
+                zoom={14}
                 center={[39.4699, -0.3763]}
-                style={{ height: "250px", width: "100%" }}
                 scrollWheelZoom={true}
                 dragging={true}
                 zoomControl={true}
@@ -119,6 +118,7 @@ export default function MiniBarrioMap({
                                         p.lon
                                     );
                                     setSelectedWarehouse({
+                                        id: p.id,
                                         lat: p.lat,
                                         lon: p.lon,
                                     });
@@ -150,7 +150,11 @@ export default function MiniBarrioMap({
                                         p.lat,
                                         p.lon
                                     );
-                                    setStartPoint({ lat: p.lat, lon: p.lon });
+                                    setStartPoint({
+                                        id: p.id,
+                                        lat: p.lat,
+                                        lon: p.lon,
+                                    });
                                 },
                             }}
                             pane="topPane"
@@ -158,7 +162,6 @@ export default function MiniBarrioMap({
                     );
                 })}
             </MapContainer>
-            <MapLegend />
         </div>
     );
 }
