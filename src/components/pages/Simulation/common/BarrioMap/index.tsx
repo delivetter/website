@@ -9,7 +9,7 @@ export type BarrioMapProps = GeoJSONWithInteractionsProps;
 export function BarrioMap({
     onSelectBarrio,
     selectedBarrio,
-    colorScheme = "default",
+    colorScheme = "primary",
 }: BarrioMapProps) {
     return (
         <div className="rounded-lg overflow-hidden shadow mb-6">

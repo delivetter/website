@@ -10,14 +10,34 @@ import {
 export interface GeoJSONWithInteractionsProps {
     selectedBarrio?: string;
     onSelectBarrio: (barrio: string) => void;
-    colorScheme?: "default" | "green";
+    colorScheme?: "primary" | "secondary";
 }
 
-// Componente para gestionar el estilo y las interacciones del GeoJSON
+const defaultStyle = {
+    weight: 1,
+    color: "#666",
+    fillColor: "#f0f0f0",
+    fillOpacity: 0.3,
+};
+
+const hoverStyle = (colorScheme: string) => ({
+    weight: 2,
+    color: colorScheme === "primary" ? "#3B82F6" : "#15803D",
+    fillColor: colorScheme === "primary" ? "#BFDBFE" : "#BBF7D0",
+    fillOpacity: 0.6,
+});
+
+const selectedStyle = (colorScheme: string) => ({
+    weight: 2,
+    color: colorScheme === "primary" ? "#1D4ED8" : "#166534",
+    fillColor: colorScheme === "primary" ? "#93C5FD" : "#86EFAC",
+    fillOpacity: 0.7,
+});
+
 export function GeoJSONWithInteractions({
     selectedBarrio,
     onSelectBarrio,
-    colorScheme = "default",
+    colorScheme = "primary",
 }: GeoJSONWithInteractionsProps) {
     const [barriosGeoJSON, setBarriosGeoJSON] = useState<BarriosGeoJSON | null>(
         null
@@ -26,51 +46,12 @@ export function GeoJSONWithInteractions({
     const geoJsonRef = useRef<L.GeoJSON | null>(null);
     const map = useMap();
 
-    // Estilos para los diferentes estados de los barrios
-    const defaultStyle = {
-        weight: 1,
-        color: "#666",
-        fillColor: "#f0f0f0",
-        fillOpacity: 0.3,
-    };
-
-    const hoverStyle =
-        colorScheme === "green"
-            ? {
-                  weight: 2,
-                  color: "#15803D",
-                  fillColor: "#BBF7D0",
-                  fillOpacity: 0.6,
-              }
-            : {
-                  weight: 2,
-                  color: "#3B82F6",
-                  fillColor: "#BFDBFE",
-                  fillOpacity: 0.6,
-              };
-
-    const selectedStyle =
-        colorScheme === "green"
-            ? {
-                  weight: 2,
-                  color: "#166534", // borde verde
-                  fillColor: "#86EFAC", // relleno verde
-                  fillOpacity: 0.7,
-              }
-            : {
-                  weight: 2,
-                  color: "#1D4ED8", // azul
-                  fillColor: "#93C5FD",
-                  fillOpacity: 0.7,
-              };
-
     useEffect(() => {
         barriosGeoJSONPromise.then((geojson) => {
             setBarriosGeoJSON(geojson);
         });
     }, []);
 
-    // Resetea y aplica los estilos cuando cambia el barrio seleccionado
     useEffect(() => {
         if (geoJsonRef.current) {
             geoJsonRef.current.eachLayer((layer: any) => {
@@ -86,7 +67,6 @@ export function GeoJSONWithInteractions({
         }
     }, [selectedBarrio, selectedStyle, defaultStyle]);
 
-    // Configura las interacciones para cada feature del GeoJSON
     const onEachFeature = useCallback(
         (feature: any, layer: any) => {
             if (!feature || !feature.properties) return;
@@ -101,7 +81,7 @@ export function GeoJSONWithInteractions({
                 // Al pasar el ratón, muestra el estilo hover
                 mouseover: () => {
                     if (name !== selectedBarrio) {
-                        layer.setStyle(hoverStyle);
+                        layer.setStyle(hoverStyle(colorScheme));
                     }
 
                     // Trae la capa al frente para mejor visualización
@@ -112,7 +92,7 @@ export function GeoJSONWithInteractions({
                     if (name !== selectedBarrio) {
                         layer.setStyle(defaultStyle);
                     } else {
-                        layer.setStyle(selectedStyle);
+                        layer.setStyle(selectedStyle(colorScheme));
                     }
                 },
             });
@@ -138,7 +118,7 @@ export function GeoJSONWithInteractions({
                     if (!feature || !feature.properties) return defaultStyle;
                     const name = feature.properties.nombre;
                     return name === selectedBarrio
-                        ? selectedStyle
+                        ? selectedStyle(colorScheme)
                         : defaultStyle;
                 },
                 onEachFeature: onEachFeature,

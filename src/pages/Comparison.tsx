@@ -59,7 +59,7 @@ export default function Comparison() {
           <img src={m1Image} alt="Traditional delivery van" className="w-full object-cover rounded-lg shadow-md" />
         </motion.div>
         <motion.div 
-          className="bg-blue-50 p-4 rounded-lg border border-blue-100 mb-6 text-sm text-gray-700"
+          className="bg-white p-4 rounded-lg border border-gray-200 mb-6 text-sm text-gray-700"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15 }}
@@ -118,34 +118,34 @@ export default function Comparison() {
           transition={{ delay: 0.8 }}
           className="mt-6"
         >
-          <h3 className="text-xl font-semibold text-blue-700 mb-3 border-b border-blue-100 pb-2">Operating Costs - Source: Spanish Ministry of Transport</h3>
+          <h3 className="text-xl font-semibold text-black mb-3 border-b border-blue-100 pb-2">Operating Costs - Source: Spanish Ministry of Transport</h3>
           
           <div className="bg-white p-4 rounded-lg shadow-sm mb-4">
             <h4 className="text-md font-semibold text-gray-700 mb-2">Fixed Costs</h4>
             <div className="space-y-1 font-mono text-sm">
               <div className="flex justify-between">
                 <span className="text-gray-600">Vehicle amortization:</span>
-                <span className="text-blue-700">6.69 €/day</span>
+                <span className="text-red-700">6.69 €/day</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">Vehicle financing:</span>
-                <span className="text-blue-700">1.64 €/day</span>
+                <span className="text-red-700">1.64 €/day</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">Insurance:</span>
-                <span className="text-blue-700">12.11 €/day</span>
+                <span className="text-red-700">12.11 €/day</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">Tax costs:</span>
-                <span className="text-blue-700">1.47 €/day</span>
+                <span className="text-red-700">1.47 €/day</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">Indirect costs:</span>
-                <span className="text-blue-700">9.85 €/day</span>
+                <span className="text-red-700">9.85 €/day</span>
               </div>
               <div className="flex justify-between font-semibold pt-1 border-t border-gray-200 mt-1">
                 <span>Total fixed costs:</span>
-                <span className="text-blue-700">31.76 €/day</span>
+                <span className="text-red-700">31.76 €/day</span>
               </div>
             </div>
           </div>
@@ -155,15 +155,15 @@ export default function Comparison() {
             <div className="space-y-1 font-mono text-sm">
               <div className="flex justify-between">
                 <span className="text-gray-600">Driver personnel:</span>
-                <span className="text-blue-700">17.82 €/hour</span>
+                <span className="text-red-700">17.82 €/hour</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">Allowances:</span>
-                <span className="text-blue-700">3.36 €/hour</span>
+                <span className="text-red-700">3.36 €/hour</span>
               </div>
               <div className="flex justify-between font-semibold pt-1 border-t border-gray-200 mt-1">
                 <span>Total time-based costs:</span>
-                <span className="text-blue-700">21.19 €/hour</span>
+                <span className="text-red-700">21.19 €/hour</span>
               </div>
             </div>
           </div>
@@ -173,27 +173,27 @@ export default function Comparison() {
             <div className="space-y-1 font-mono text-sm">
               <div className="flex justify-between">
                 <span className="text-gray-600">Fuel:</span>
-                <span className="text-blue-700">0.135 €/km</span>
+                <span className="text-red-700">0.135 €/km</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">Urea solution:</span>
-                <span className="text-blue-700">0.006 €/km</span>
+                <span className="text-red-700">0.006 €/km</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">Tires:</span>
-                <span className="text-blue-700">0.014 €/km</span>
+                <span className="text-red-700">0.014 €/km</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">Maintenance:</span>
-                <span className="text-blue-700">0.011 €/km</span>
+                <span className="text-red-700">0.011 €/km</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">Repairs:</span>
-                <span className="text-blue-700">0.019 €/km</span>
+                <span className="text-red-700">0.019 €/km</span>
               </div>
               <div className="flex justify-between font-semibold pt-1 border-t border-gray-200 mt-1">
                 <span>Total distance-based costs:</span>
-                <span className="text-blue-700">0.184 €/km</span>
+                <span className="text-red-700">0.184 €/km</span>
               </div>
             </div>
           </div>
@@ -392,7 +392,7 @@ export default function Comparison() {
             
             {/* Traditional Model Card */}
             <div 
-              className={`model-showcase model-traditional rounded-xl overflow-hidden shadow-lg ${
+              className={`model-showcase  rounded-xl overflow-hidden shadow-lg ${
                 hoverModel === 'traditional' ? 'flex-[3]' : 
                 hoverModel === 'autonomous' ? 'flex-[1]' : 'flex-[1]'
               }`}
@@ -405,8 +405,8 @@ export default function Comparison() {
               onMouseLeave={() => setHoverModel(null)}
             >
               <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-blue-400 rounded-full blur-3xl opacity-30 -mr-20 -mt-20"></div>
-                <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-300 rounded-full blur-3xl opacity-20 -ml-10 -mb-10"></div>
+                <div className="absolute top-0 right-0 w-64 h-64 bg-gray-400 rounded-full blur-3xl opacity-30 -mr-20 -mt-20"></div>
+                <div className="absolute bottom-0 left-0 w-64 h-64 bg-gray-300 rounded-full blur-3xl opacity-20 -ml-10 -mb-10"></div>
               </div>
               
               <div className="relative z-10 p-8 h-full flex flex-col">
@@ -416,12 +416,12 @@ export default function Comparison() {
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
                 >
-                  <div className="bg-white p-4 rounded-full mr-5 shadow-lg">
-                    <FaTruck className="text-3xl text-red-600" />
+                  <div className="bg-black p-4 rounded-full mr-5 shadow-lg">
+                    <FaTruck className="text-3xl text-white" />
                   </div>
                   <div>
-                    <h2 className="text-3xl font-bold text-white">Traditional Delivery</h2>
-                    <p className="text-blue-100">Human-driven vehicles</p>
+                    <h2 className="text-3xl font-bold text-black">Traditional Delivery</h2>
+                    <p className="text-black-100">Human-driven vehicles</p>
                   </div>
                 </motion.div>
                 
@@ -443,7 +443,7 @@ export default function Comparison() {
                       </div>
                     </div>
                     
-                    <div className="bg-white/20 backdrop-blur-sm rounded-lg p-3 text-white border border-white/30 mt-auto">
+                    <div className="flex flex-col justify-between h-full bg-gray-400/20 backdrop-blur-sm rounded-lg p-3 text-black border border-gray-400/30 mt-auto">
                       <p className="font-medium mb-1">Conventional delivery vans have been the backbone of logistics for decades.</p>
                       <div className="text-center mt-1 font-medium">
                         <span className="inline-block animate-pulse">Hover to explore</span>
@@ -459,7 +459,7 @@ export default function Comparison() {
             
             {/* Autonomous Model Card */}
             <div 
-              className={`model-showcase model-autonomous rounded-xl overflow-hidden shadow-lg ${
+              className={`model-showcase bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl overflow-hidden shadow-lg ${
                 hoverModel === 'autonomous' ? 'flex-[3]' : 
                 hoverModel === 'traditional' ? 'flex-[1]' : 'flex-[1]'
               }`}
@@ -484,7 +484,7 @@ export default function Comparison() {
                   transition={{ duration: 0.5, delay: 0.2 }}
                 >
                   <div className="bg-white p-4 rounded-full mr-5 shadow-lg">
-                    <FaRobot className="text-3xl text-green-600" />
+                    <FaRobot className="text-3xl text-purple-600" />
                   </div>
                   <div>
                     <h2 className="text-3xl font-bold text-white">Autonomous Delivery</h2>
