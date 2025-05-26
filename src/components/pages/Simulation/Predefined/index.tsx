@@ -231,7 +231,7 @@ export function PredefinedSimulationsTabContent({
                                     Simulation Results
                                 </h3>
                                 <div className="flex flex-row gap-6">
-                                    <div className="absolute inset-0 overflow-hidden">
+                                    <div className="absolute inset-0 overflow-hidden" style={{ pointerEvents: "none" }}>
                                         <div className="absolute top-0 right-0 w-64 h-64 bg-gray-400 rounded-full blur-3xl opacity-30 -mr-20 -mt-20"></div>
                                         <div className="absolute bottom-0 left-0 w-64 h-64 bg-gray-300 rounded-full blur-3xl opacity-20 -ml-10 -mb-10"></div>
                                     </div>
