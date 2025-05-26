@@ -37,7 +37,7 @@ export default function About() {
                         integration of autonomous delivery robots. Inspired by
                         the BotNet and ONA initiatives in Barcelona, we adapted
                         the concept to the reality of Valencia, applying it at
-                        the neighborhood level.
+                        the neighborhood level. We designed two models to compare and analyse which one performs better in each zone. 
                     </p>
                     <ul className="list-disc pl-6 mb-6 space-y-2 text-gray-700">
                         <li>
@@ -100,7 +100,7 @@ export default function About() {
                     className="mb-12"
                 >
                     <h2 className="text-2xl font-semibold mb-4">
-                        Data & Methodology
+                        Data Obtaining
                     </h2>
                     <p className="text-gray-700 mb-6 leading-relaxed">
                         We integrated data from OpenStreetMap, the Spanish
@@ -127,17 +127,6 @@ export default function About() {
                             cadastral and OSM data.
                         </figcaption>
                     </motion.figure>
-                    <div className="bg-gray-100 p-6 rounded-lg border-l-4 border-blue-400">
-                        <h3 className="text-xl font-semibold mb-2">
-                            Interactive Simulation
-                        </h3>
-                        <p className="text-gray-700">
-                            The project features interactive simulations where
-                            users can explore delivery dynamics for each model
-                            in real time, comparing metrics across different
-                            scenarios and neighborhoods.
-                        </p>
-                    </div>
                 </motion.div>
 
                 <motion.div
@@ -155,32 +144,32 @@ export default function About() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 justify-items-center">
                         <AvatarWithText
                             upperText="José Aguilar Camps"
-                            imgSrc="/src/assets/team/jose.webp"
+                            imgSrc="/src/assets/team/jose_cortado.jpg"
                             className="object-bottom"
                         />
                         <AvatarWithText
                             upperText="Anna Aparici Nogués"
-                            imgSrc="/src/assets/team/anna.webp"
+                            imgSrc="/src/assets/team/anna_cortado.jpg"
                             className="object-bottom"
                         />
                         <AvatarWithText
                             upperText="José Milán Server"
-                            imgSrc="/src/assets/team/josete.webp"
+                            imgSrc="/src/assets/team/josete_cortado.png"
                             className="object-bottom"
                         />
                         <AvatarWithText
                             upperText="Joel Moncho Mas"
-                            imgSrc="/src/assets/team/joel.webp"
+                            imgSrc="/src/assets/team/joel_cortado.jpg"
                             className="object-bottom"
                         />
                         <AvatarWithText
                             upperText="Juanjo Prades García"
-                            imgSrc="/src/assets/team/juanjo.webp"
+                            imgSrc="/src/assets/team/juanjo_cortado.jpg"
                             className="object-bottom"
                         />
                         <AvatarWithText
                             upperText="Daniel Reinón García"
-                            imgSrc="/src/assets/team/dani.webp"
+                            imgSrc="/src/assets/team/dani_cortado.jpg"
                             className="object-bottom"
                         />
                     </div>
