@@ -20,4 +20,7 @@ export default defineConfig({
             },
         },
     },
+    server: {
+        allowedHosts: [".replit.dev"]
+    }
 });
