@@ -123,7 +123,7 @@ export function InteractiveSimulationsTabContent({
                                 className="interactive-input w-full p-3 bg-white"
                             >
                                 <option value="">Select neighborhood</option>
-                                {Object.keys(neighborhoods).map((n) => (
+                                {Object.keys(neighborhoods).sort().map((n) => (
                                     <option key={n} value={n}>
                                         {n}
                                     </option>

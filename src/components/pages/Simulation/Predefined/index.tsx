@@ -137,7 +137,7 @@ export function PredefinedSimulationsTabContent({
                                         >
                                             Select neighborhood
                                         </option>
-                                        {Object.keys(neighborhoods).map(
+                                        {Object.keys(neighborhoods).sort().map(
                                             (barrio) => (
                                                 <option
                                                     key={barrio}
