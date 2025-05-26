@@ -13,7 +13,7 @@ export default function AvatarWithText({
     className,
 }: AvatarWithTextProps) {
     return (
-        <div className="relative aspect-square w-44">
+        <div className="relative aspect-square w-52">
             <svg viewBox="0 0 200 200" className="absolute w-full h-full z-10">
                 <defs>
                     <path

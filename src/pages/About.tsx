@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
-import { Link } from "wouter";
-import { FaGraduationCap, FaLeaf } from "react-icons/fa";
+import { FaGraduationCap } from "react-icons/fa";
 import { useEffect } from "react";
 import dataImage from "../assets/catastro.png";
 import AvatarWithText from "@/components/pages/Home/AvatarWithText";
+import Title from "@/components/layout/Title";
 
 export default function About() {
     useEffect(() => {
@@ -18,14 +18,9 @@ export default function About() {
     return (
         <div className="page-transition">
             <div className="max-w-4xl mx-auto">
-                <motion.h1
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className="text-3xl md:text-4xl font-bold mb-6 border-b pb-4"
-                >
-                    About DELIVETTER
-                </motion.h1>
+                <Title
+                    title="About Delivetter"
+                />
 
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -164,27 +159,27 @@ export default function About() {
                             className="object-bottom"
                         />
                         <AvatarWithText
-                            upperText="Daniel Reinón García"
-                            imgSrc="/src/assets/team/dani.webp"
+                            upperText="Anna Aparici Nogués"
+                            imgSrc="/src/assets/team/anna.webp"
                             className="object-bottom"
                         />
                         <AvatarWithText
-                            upperText="José Aguilar Camps"
+                            upperText="José Milán Server"
                             imgSrc="/src/assets/team/josete.webp"
                             className="object-bottom"
                         />
                         <AvatarWithText
-                            upperText="José Aguilar Camps"
-                            imgSrc="/src/assets/team/juanjo.webp"
-                            className="object-bottom"
-                        />
-                        <AvatarWithText
-                            upperText="José Aguilar Camps"
+                            upperText="Joel Moncho Mas"
                             imgSrc="/src/assets/team/joel.webp"
                             className="object-bottom"
                         />
                         <AvatarWithText
-                            upperText="José Aguilar Camps"
+                            upperText="Juanjo Prades García"
+                            imgSrc="/src/assets/team/juanjo.webp"
+                            className="object-bottom"
+                        />
+                        <AvatarWithText
+                            upperText="Daniel Reinón García"
                             imgSrc="/src/assets/team/dani.webp"
                             className="object-bottom"
                         />
