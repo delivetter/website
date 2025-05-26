@@ -111,34 +111,6 @@ export default function Home() {
                     </h2>
                   </div>
                 )}
-                
-                {/* Contenido que aparece al hacer hover, en la parte inferior */}
-                {activeIndex === index && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="mb-4"
-                  >
-                    <p className="text-lg text-white/90 mb-6 max-w-md">
-                      {slide.subtitle}
-                    </p>
-                    <div className="flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-3">
-                      <Link 
-                        to="/comparison" 
-                        className="bg-white/90 text-blue-800 px-5 py-2 rounded-full font-medium hover:bg-white transition-all text-sm md:text-base"
-                      >
-                        Compare <FaArrowRight className="inline ml-1" />
-                      </Link>
-                      <Link 
-                        to="/simulation" 
-                        className="bg-blue-600/90 text-white px-5 py-2 rounded-full font-medium hover:bg-blue-600 transition-all text-sm md:text-base"
-                      >
-                        Simulate <FaArrowRight className="inline ml-1" />
-                      </Link>
-                    </div>
-                  </motion.div>
-                )}
               </div>
             </motion.div>
           ))}
