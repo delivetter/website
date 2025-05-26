@@ -10,6 +10,7 @@ import dataImage5 from "../assets/cids.jpg";
 import dataImage6 from "../assets/supergraph.jpg";
 import AvatarWithText from "@/components/pages/Home/AvatarWithText";
 import Title from "@/components/layout/Title";
+import imgAnna from "../assets/team/anna_cortado.jpg";
 
 export default function About() {
   useEffect(() => {
@@ -199,7 +200,7 @@ export default function About() {
             />
             <AvatarWithText
               upperText="Anna Aparici Nogués"
-              imgSrc="/src/assets/team/anna_cortado.jpg"
+              imgSrc={imgAnna} 
               className="object-bottom"
             />
             <AvatarWithText
