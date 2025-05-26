@@ -156,7 +156,7 @@ export default function About() {
             <img
               src={carouselData[currentIndex].src}
               alt={`Data image ${currentIndex + 1}`}
-              className="rounded-lg shadow-md w-full max-w-3xl mx-auto object-cover"
+              className="rounded-lg shadow-md w-full max-w-5xl mx-auto object-cover"
               style={{ height: "500px" }}
             />
             <figcaption className="text-sm text-center text-gray-500 mt-2">
