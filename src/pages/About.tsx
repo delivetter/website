@@ -11,6 +11,12 @@ import dataImage6 from "../assets/supergraph.jpg";
 import AvatarWithText from "@/components/pages/Home/AvatarWithText";
 import Title from "@/components/layout/Title";
 import imgAnna from "../assets/team/anna_cortado.jpg";
+import imgDani from "../assets/team/dani_cortado.jpg";
+import imgJoel from "../assets/team/joel_cortado.jpg";
+import imgJose from "../assets/team/jose_cortado.jpg";
+import imgJuanjo from "../assets/team/juanjo_cortado.jpg";
+import imgJosete from "../assets/team/josete_cortado.png";
+
 
 export default function About() {
   useEffect(() => {
@@ -195,7 +201,7 @@ export default function About() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 justify-items-center">
             <AvatarWithText
               upperText="José Aguilar Camps"
-              imgSrc="/src/assets/team/jose_cortado.jpg"
+              imgSrc={imgJose}
               className="object-bottom"
             />
             <AvatarWithText
@@ -205,22 +211,22 @@ export default function About() {
             />
             <AvatarWithText
               upperText="José Milán Server"
-              imgSrc="/src/assets/team/josete_cortado.png"
+              imgSrc={imgJosete}
               className="object-bottom"
             />
             <AvatarWithText
               upperText="Joel Moncho Mas"
-              imgSrc="/src/assets/team/joel_cortado.jpg"
+              imgSrc={imgJoel}
               className="object-bottom"
             />
             <AvatarWithText
               upperText="Juanjo Prades García"
-              imgSrc="/src/assets/team/juanjo_cortado.jpg"
+              imgSrc={imgJuanjo}
               className="object-bottom"
             />
             <AvatarWithText
               upperText="Daniel Reinón García"
-              imgSrc="/src/assets/team/dani_cortado.jpg"
+              imgSrc={imgDani}
               className="object-bottom"
             />
           </div>
