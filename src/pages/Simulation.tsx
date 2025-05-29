@@ -19,10 +19,11 @@ import {
     Warehouse,
 } from "@/lib/neighborhoods";
 import { InteractiveSimulationsTabContent } from "@/components/pages/Simulation/Interactive";
-import { BarrioMap } from "@/components/pages/Simulation/common/BarrioMap";
+import { NeighborhoodsMap } from "@/components/pages/Simulation/common/NeighborhoodsMap";
 import { cn } from "@/lib/utils";
 import MiniBarrioMap from "@/components/pages/Simulation/Interactive/MiniBarrioMap";
 import Title from "@/components/layout/Title";
+import NeighborhoodInfo from "@/components/pages/Simulation/common/NeighborhoodInfo";
 
 export default function Simulation() {
     const [neighborhoods, setNeighborhoods] = useState<
@@ -67,57 +68,57 @@ export default function Simulation() {
                 transition={{ duration: 0.6 }}
             >
                 <div
-                    className={`flex flex-row gap-6 bg-white rounded-lg shadow-md transition-all duration-300 overflow-hidden hover:shadow-lg hover:transform hover:-translate-y-1 p-6 mb-8 pb-10`}
+                    className={`flex flex-col gap-4 bg-white rounded-lg shadow-md transition-all duration-300 overflow-hidden hover:shadow-lg hover:transform hover:-translate-y-1 p-6 mb-8 pb-10`}
                 >
-                    <div className="flex flex-col w-3/5">
-                        <h2 className="text-xl font-medium mb-4">
-                            First, select a neighborhood:
-                        </h2>
-
-                        <BarrioMap
-                            className="min-h-full"
-                            onSelectBarrio={(name) =>
-                                setSelectedNeighborhood(neighborhoods[name])
-                            }
-                            selectedBarrio={selectedNeighborhood?.barrio}
-                            colorScheme={
-                                selectedSimulationType === "predefined"
-                                    ? "primary"
-                                    : "secondary"
-                            }
+                    <h2 className="text-xl font-medium w-full">
+                        First, select a neighborhood:
+                    </h2>
+                    <div className="flex flex-row w-full gap-4 h-96">
+                        <NeighborhoodsMap
+                            className="w-3/4"
+                            neighborhoods={neighborhoods}
+                            selectedNeighborhood={selectedNeighborhood}
+                            setSelectedNeighborhood={setSelectedNeighborhood}
+                            selectedSimulationType={selectedSimulationType}
+                        />
+                        <NeighborhoodInfo
+                            neighborhood={selectedNeighborhood}
+                            className="w-1/4"
                         />
                     </div>
-                    <div className="flex flex-col gap-y-4 w-2/5 min-h-full pb-10">
-                        <h2 className="text-l font-medium">
-                            {selectedSimulationType === "predefined"
-                                ? "Selected neighborhood:"
-                                : "Choose a starting point and a warehouse:"}
-                        </h2>
-                        <div
-                            className={cn(
-                                "min-h-full rounded-lg overflow-hidden shadow-md mb-8",
-                                selectedNeighborhood
-                                    ? "bg-transparent shadow-none"
-                                    : "bg-white flex items-center justify-center"
-                            )}
-                        >
-                            {selectedNeighborhood ? (
-                                <MiniBarrioMap
-                                    className="min-h-full bg-white rounded-lg shadow-md transition-all duration-300 overflow-hidden hover:shadow-lg hover:transform hover:-translate-y-1 p-6 mb-8"
-                                    selectedBarrio={selectedNeighborhood}
-                                    startPoint={startPoint}
-                                    setStartPoint={setStartPoint}
-                                    selectedWarehouse={selectedWarehouse}
-                                    setSelectedWarehouse={setSelectedWarehouse}
-                                />
-                            ) : (
-                                <div className="flex gap-4 items-center bg-yellow-200 p-4 rounded-lg w-fit ">
-                                    <FaExclamationTriangle className="text-lg" />
-                                    <div>No neighborhood selected yet!</div>
-                                </div>
-                            )}
+                    {selectedSimulationType === "interactive" && (
+                        <div className="flex flex-col gap-y-4 w-2/5 min-h-full pb-10">
+                            <h2 className="text-l font-medium">
+                                Choose a starting point and a warehouse:
+                            </h2>
+                            <div
+                                className={cn(
+                                    "min-h-full rounded-lg overflow-hidden shadow-md mb-8",
+                                    selectedNeighborhood
+                                        ? "bg-transparent shadow-none"
+                                        : "bg-white flex items-center justify-center"
+                                )}
+                            >
+                                {selectedNeighborhood ? (
+                                    <MiniBarrioMap
+                                        className="min-h-full bg-white rounded-lg shadow-md transition-all duration-300 overflow-hidden hover:shadow-lg hover:transform hover:-translate-y-1 p-6 mb-8"
+                                        selectedBarrio={selectedNeighborhood}
+                                        startPoint={startPoint}
+                                        setStartPoint={setStartPoint}
+                                        selectedWarehouse={selectedWarehouse}
+                                        setSelectedWarehouse={
+                                            setSelectedWarehouse
+                                        }
+                                    />
+                                ) : (
+                                    <div className="flex gap-4 items-center bg-yellow-200 p-4 rounded-lg w-fit ">
+                                        <FaExclamationTriangle className="text-lg" />
+                                        <div>No neighborhood selected yet!</div>
+                                    </div>
+                                )}
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </div>
 
                 <Tabs

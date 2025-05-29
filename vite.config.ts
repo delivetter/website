@@ -21,6 +21,9 @@ export default defineConfig({
         },
     },
     server: {
-        allowedHosts: [".replit.dev"]
+        allowedHosts: [".replit.dev"],
+        watch: {
+            usePolling: true
+        }
     }
 });

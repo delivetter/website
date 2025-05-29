@@ -10,14 +10,14 @@ export type BarriosGeoJSONProperties = {
     geo_point_2d: Coordinates;
 };
 
-export type BarriosGeoJSON = GeoJSON.FeatureCollection<
+export type BarriosFeatureCollection = GeoJSON.FeatureCollection<
     Geometry,
     BarriosGeoJSONProperties
 >;
 
 export const barriosGeoJSONPromise = fetch("barris.geojson")
     .then(async (res) => {
-        const geojson: BarriosGeoJSON = await res.json();
+        const geojson: BarriosFeatureCollection = await res.json();
         return geojson;
     })
     .catch((error) => {

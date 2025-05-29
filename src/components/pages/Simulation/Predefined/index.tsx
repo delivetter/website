@@ -1,5 +1,5 @@
 import { TabsContent } from "@/components/ui/tabs";
-import { BarrioMap } from "../common/BarrioMap";
+import { NeighborhoodsMap } from "../common/NeighborhoodsMap";
 import {
     FaBoxOpen,
     FaClock,
@@ -22,6 +22,8 @@ import { ModelsObject } from "../common/types/models";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { SimulationsTabContentProps } from "../common/types/props";
+import { Badge } from "@/components/ui/badge";
+import { Info } from "lucide-react";
 
 type PredefinedSimulationSelectedResults =
     ModelsObject<PredefinedSimulationResultRow | null>;
@@ -99,12 +101,20 @@ export function PredefinedSimulationsTabContent({
                         Predefined Route Simulations
                     </h2>
                 </div>
-                <p className="text-gray-600 mb-6">
+                <p className="text-gray-600 mb-4">
                     Compare traditional delivery vans (M1) with autonomous
                     robots (M2) across different neighborhoods and package
                     volumes.
                 </p>
-
+                <Badge
+                    variant="outline"
+                    className="bg-blue-100 text-sm gap-2 px-3 py-1 flex items-center w-fit mb-6"
+                >
+                    <Info className="w-4 h-4" />
+                    In these simulations, the van's starting point and warehouse
+                    are averaged across many combinations, unlike in interactive
+                    simulations where you manually choose them.
+                </Badge>
                 {isLoading ? (
                     <LoadingData />
                 ) : (
@@ -119,35 +129,7 @@ export function PredefinedSimulationsTabContent({
                                         <FaMapMarkerAlt className="text-primary mr-2" />
                                         Neighborhood
                                     </label>
-                                    <select
-                                        id="neighborhood"
-                                        value={selectedNeighborhood?.barrio}
-                                        onChange={(
-                                            e: React.ChangeEvent<HTMLSelectElement>
-                                        ) =>
-                                            setSelectedNeighborhood(
-                                                neighborhoods[e.target.value]
-                                            )
-                                        }
-                                        className="interactive-input w-full p-3 bg-white border border-gray-200 rounded-md"
-                                    >
-                                        <option
-                                            key="default-neighborhood"
-                                            value=""
-                                        >
-                                            Select neighborhood
-                                        </option>
-                                        {Object.keys(neighborhoods).sort().map(
-                                            (barrio) => (
-                                                <option
-                                                    key={barrio}
-                                                    value={barrio}
-                                                >
-                                                    {barrio}
-                                                </option>
-                                            )
-                                        )}
-                                    </select>
+                                   
                                 </div>
                                 <div>
                                     <label
@@ -184,44 +166,7 @@ export function PredefinedSimulationsTabContent({
                                 </div>
                             </div>
 
-                            <div className="bg-white rounded-lg shadow-sm border border-gray-100 w-1/2 p-4">
-                                <h4 className="font-medium text-gray-800 mb-3 flex items-center">
-                                    <FaInfo className="mr-2 text-blue-500" />{" "}
-                                    Neighborhood Information
-                                </h4>
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                    <div className="text-center">
-                                        <FaShoppingCart className="text-primary text-3xl mx-auto mb-2" />
-                                        <p className="text-sm text-gray-500">
-                                            Stores
-                                        </p>
-                                        <p className="text-lg font-semibold text-gray-800">
-                                            {selectedNeighborhood?.comercios_barrio ||
-                                                "-"}
-                                        </p>
-                                    </div>
-                                    <div className="text-center">
-                                        <FaTruck className="text-secondary text-3xl mx-auto mb-2" />
-                                        <p className="text-sm text-gray-500">
-                                            Distribution Points
-                                        </p>
-                                        <p className="text-lg font-semibold text-gray-800">
-                                            {selectedNeighborhood?.cids_barrio ||
-                                                "-"}
-                                        </p>
-                                    </div>
-                                    <div className="text-center">
-                                        <FaWarehouse className="text-yellow-500 text-3xl mx-auto mb-2" />
-                                        <p className="text-sm text-gray-500">
-                                            Warehouses
-                                        </p>
-                                        <p className="text-lg font-semibold text-gray-800">
-                                            {selectedNeighborhood?.almacenes_barrio ||
-                                                "-"}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
 
                         {(predefinedSimulationSelectedResults?.M1 ||
@@ -231,7 +176,10 @@ export function PredefinedSimulationsTabContent({
                                     Simulation Results
                                 </h3>
                                 <div className="flex flex-row gap-6">
-                                    <div className="absolute inset-0 overflow-hidden" style={{ pointerEvents: "none" }}>
+                                    <div
+                                        className="absolute inset-0 overflow-hidden"
+                                        style={{ pointerEvents: "none" }}
+                                    >
                                         <div className="absolute top-0 right-0 w-64 h-64 bg-gray-400 rounded-full blur-3xl opacity-30 -mr-20 -mt-20"></div>
                                         <div className="absolute bottom-0 left-0 w-64 h-64 bg-gray-300 rounded-full blur-3xl opacity-20 -ml-10 -mb-10"></div>
                                     </div>

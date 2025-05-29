@@ -1,5 +1,5 @@
 import { TabsContent } from "@/components/ui/tabs";
-import { BarrioMap } from "../common/BarrioMap";
+import { NeighborhoodsMap } from "../common/NeighborhoodsMap";
 import {
     FaBoxOpen,
     FaChartLine,

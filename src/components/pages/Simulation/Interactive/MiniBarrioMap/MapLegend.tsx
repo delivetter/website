@@ -1,68 +1,20 @@
 export default function MapLegend() {
     return (
-        <div
-            style={{
-                height: "auto",
-                padding: "10px 14px",
-                borderRadius: "8px",
-                fontSize: "0.8rem",
-                lineHeight: "1.5",
-            }}
-        >
-            <div style={{ marginBottom: 6 }}>
-                <span
-                    style={{
-                        display: "inline-block",
-                        width: 12,
-                        height: 12,
-                        backgroundColor: "#4ADE80", // verde
-                        borderRadius: "50%",
-                        marginRight: 6,
-                        border: "1px solid #16A34A",
-                    }}
-                ></span>
+        <div className="p-3.5 rounded-lg text-sm leading-6">
+            <div className="mb-1.5">
+                <span className="inline-block w-3 h-3 bg-green-400 rounded-full mr-1.5 border border-green-600"></span>
                 Punto de entrada disponible
             </div>
-            <div style={{ marginBottom: 6 }}>
-                <span
-                    style={{
-                        display: "inline-block",
-                        width: 12,
-                        height: 12,
-                        backgroundColor: "#F87171", // rojo
-                        borderRadius: "50%",
-                        marginRight: 6,
-                        border: "1px solid #DC2626",
-                    }}
-                ></span>
+            <div className="mb-1.5">
+                <span className="inline-block w-3 h-3 bg-red-400 rounded-full mr-1.5 border border-red-600"></span>
                 Punto de entrada seleccionado
             </div>
-            <div style={{ marginBottom: 6 }}>
-                <span
-                    style={{
-                        display: "inline-block",
-                        width: 12,
-                        height: 12,
-                        backgroundColor: "#9CA3AF", // gris
-                        borderRadius: "50%",
-                        marginRight: 6,
-                        border: "1px solid #4B5563",
-                    }}
-                ></span>
+            <div className="mb-1.5">
+                <span className="inline-block w-3 h-3 bg-gray-400 rounded-full mr-1.5 border border-gray-700"></span>
                 Almacén disponible
             </div>
             <div>
-                <span
-                    style={{
-                        display: "inline-block",
-                        width: 12,
-                        height: 12,
-                        backgroundColor: "#C4B5FD", // violeta
-                        borderRadius: "50%",
-                        marginRight: 6,
-                        border: "1px solid #7C3AED",
-                    }}
-                ></span>
+                <span className="inline-block w-3 h-3 bg-purple-300 rounded-full mr-1.5 border border-purple-700"></span>
                 Almacén seleccionado
             </div>
         </div>

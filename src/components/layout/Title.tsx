@@ -12,7 +12,7 @@ export default function Title({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="relative mb-12 py-6"
+            className="relative mb-8 py-6"
         >
             <div className="absolute inset-0 bg-gradient-to-r from-blue-100/50 via-purple-100/50 to-blue-100/50 rounded-xl"></div>
             <div className="absolute top-0 left-0 w-32 h-32 bg-blue-300 rounded-full blur-3xl opacity-20 -ml-10 -mt-10"></div>
