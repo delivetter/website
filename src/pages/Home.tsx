@@ -6,9 +6,9 @@ import { useEffect, useState } from "react";
 // Importar las imágenes para la galería
 import home1 from "../assets/home_1_horizontal.jpg";
 import home2 from "../assets/home_4_horizontal.jpg";
-import home3 from "../assets/home_3_horizontal.jpg";
+import home3 from "../assets/home_horizontal.png";
 import home6 from "../assets/home_2_horizontal.jpg";
-import home5 from "../assets/home8.png";
+import home5 from "../assets/home_horizontal_5.jpg";
 
 export default function Home() {
   // Estado para la imagen activa (hover)
