@@ -13,7 +13,7 @@ export default function PredefinedTitle() {
             </div>
             <p className="text-gray-600 mb-4">
                 Compare traditional delivery vans (M1) with autonomous robots
-                (M2) across different neighborhoods and numbers of packages.
+                (M2) across different precalculated combinations of neighborhoods and numbers of packages.
             </p>
             <Badge
                 variant="outline"

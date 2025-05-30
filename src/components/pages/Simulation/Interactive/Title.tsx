@@ -10,8 +10,8 @@ export default function InteractiveTitle() {
                 </h2>
             </div>
             <p className="text-gray-600 mb-6">
-                Select a neighborhood and explore different delivery scenarios
-                with custom package volumes.
+                Compare traditional delivery vans (M1) with autonomous robots
+                (M2) in a custom scenario.
             </p>
         </>
     );
