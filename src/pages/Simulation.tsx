@@ -37,9 +37,6 @@ export default function Simulation() {
     const [selectedPackageQty, setSelectedPackageQty] = useState<number | null>(
         null
     );
-    const [startPoint, setStartPoint] = useState<StartPoint | null>(null);
-    const [selectedWarehouse, setSelectedWarehouse] =
-        useState<Warehouse | null>(null);
 
     useEffect(() => {
         getNeighborhoods().then((data) => {
@@ -111,8 +108,6 @@ export default function Simulation() {
                         setSelectedNeighborhood={setSelectedNeighborhood}
                         selectedPackageQty={selectedPackageQty}
                         setSelectedPackageQty={setSelectedPackageQty}
-                        startPoint={startPoint}
-                        selectedWarehouse={selectedWarehouse}
                         neighborhoods={neighborhoods}
                     />
                 </Tabs>

@@ -26,6 +26,9 @@ export const predefinedSimulationsResultsPromise = fetch(
                 if (["barrio", "modelo"].includes(field)) {
                     return value.trim();
                 }
+                if (field === "modelo") {
+                    return value.toLowerCase();
+                }
                 return value;
             },
         });

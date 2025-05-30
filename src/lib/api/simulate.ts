@@ -1,26 +1,15 @@
+import {
+    ModelsObject,
+    SimulationResults,
+} from "@/components/pages/Simulation/common/types/models";
 import { Neighborhood, StartPoint, Warehouse } from "../neighborhoods";
 
-export interface ModelResults {
-    total_kms_walk: number;
-    total_hours_walk: number;
-    total_kms_drive: number;
-    total_hours_drive: number;
-    distance_cost_van: number;
-    distance_cost_ona: number;
-    time_cost_van: number;
-    time_cost_ona: number;
-    total_cost: number;
-}
-
 export interface ModelOutput {
-    results: ModelResults;
+    results: SimulationResults;
     map_html: string;
 }
 
-export interface SimulateOutput {
-    m1: ModelOutput;
-    m2: ModelOutput;
-}
+export type SimulateOutput = ModelsObject<ModelOutput | null>;
 
 export const simulate = async (
     e: React.FormEvent,
@@ -57,7 +46,7 @@ export const simulate = async (
         const data: SimulateOutput = await response.json();
         setSimulationResult(data); // puedes dividirlo en dos si quieres M1 y M2 separados
     } catch (err) {
-        throw err
+        throw err;
     } finally {
         setIsLoading(false);
     }

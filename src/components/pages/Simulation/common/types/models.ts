@@ -1,6 +1,6 @@
 export type ModelsObject<T> = {
-    M1: T;
-    M2: T;
+    m1: T;
+    m2: T;
 };
 
 export type SimulationResults = {
@@ -15,4 +15,7 @@ export type SimulationResults = {
     total_cost: number;
 };
 
-export type ModelsSimulationResults = ModelsObject<SimulationResults | null>;
+export type ModelsSimulationResults = ModelsObject<{
+    results: SimulationResults;
+    map_html?: string;
+} | null>;

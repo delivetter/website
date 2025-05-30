@@ -9,6 +9,7 @@ import {
     FaTruck,
 } from "react-icons/fa";
 import { Link } from "wouter";
+import { ResultMapPreview } from "./ResultMapPreview";
 
 export type SimulationResultsProps = {
     simulationResults: ModelsSimulationResults;
@@ -59,6 +60,12 @@ export default function SimulationResults({
                         </div>
                     </motion.div>
                     <div className="flex flex-col gap-4 w-full h-full">
+                        {simulationResults.m1?.map_html && (
+                            <ResultMapPreview
+                                html={simulationResults.m1.map_html}
+                                className="h-[400px] w-full rounded-lg shadow-sm"
+                            />
+                        )}
                         <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 h-1/3">
                             <h4 className="font-medium text-gray-800 mb-3 flex items-center">
                                 <FaRoute className="mr-2 text-blue-500" />{" "}
@@ -70,7 +77,7 @@ export default function SimulationResults({
                                         Walking:
                                     </span>
                                     <span className="font-medium">
-                                        {simulationResults.M1?.total_kms_walk.toFixed(
+                                        {simulationResults.m1?.results.total_kms_walk.toFixed(
                                             2
                                         ) || "-"}{" "}
                                         km
@@ -81,7 +88,7 @@ export default function SimulationResults({
                                         Driving:
                                     </span>
                                     <span className="font-medium">
-                                        {simulationResults.M1?.total_kms_drive.toFixed(
+                                        {simulationResults.m1?.results.total_kms_drive.toFixed(
                                             2
                                         ) || "-"}{" "}
                                         km
@@ -92,11 +99,11 @@ export default function SimulationResults({
                                         Total:
                                     </span>
                                     <span className="font-medium">
-                                        {simulationResults.M1
+                                        {simulationResults.m1
                                             ? (
-                                                  simulationResults.M1
+                                                  simulationResults.m1.results
                                                       .total_kms_walk +
-                                                  simulationResults.M1
+                                                  simulationResults.m1.results
                                                       .total_kms_drive
                                               ).toFixed(2)
                                             : "-"}{" "}
@@ -116,7 +123,7 @@ export default function SimulationResults({
                                         Walking:
                                     </span>
                                     <span className="font-medium">
-                                        {simulationResults.M1?.total_hours_walk.toFixed(
+                                        {simulationResults.m1?.results.total_hours_walk.toFixed(
                                             2
                                         ) || "-"}{" "}
                                         hours
@@ -127,7 +134,7 @@ export default function SimulationResults({
                                         Driving:
                                     </span>
                                     <span className="font-medium">
-                                        {simulationResults.M1?.total_hours_drive.toFixed(
+                                        {simulationResults.m1?.results.total_hours_drive.toFixed(
                                             2
                                         ) || "-"}{" "}
                                         hours
@@ -138,11 +145,11 @@ export default function SimulationResults({
                                         Total:
                                     </span>
                                     <span className="font-medium">
-                                        {simulationResults.M1
+                                        {simulationResults.m1
                                             ? (
-                                                  simulationResults.M1
+                                                  simulationResults.m1.results
                                                       .total_hours_walk +
-                                                  simulationResults.M1
+                                                  simulationResults.m1.results
                                                       .total_hours_drive
                                               ).toFixed(2)
                                             : "-"}{" "}
@@ -171,7 +178,7 @@ export default function SimulationResults({
                                         Distance cost:
                                     </span>
                                     <span className="font-medium">
-                                        {simulationResults.M1?.distance_cost_van.toFixed(
+                                        {simulationResults.m1?.results.distance_cost_van.toFixed(
                                             2
                                         ) || "-"}{" "}
                                         €
@@ -182,7 +189,7 @@ export default function SimulationResults({
                                         Time cost:
                                     </span>
                                     <span className="font-medium">
-                                        {simulationResults.M1?.time_cost_van.toFixed(
+                                        {simulationResults.m1?.results.time_cost_van.toFixed(
                                             2
                                         ) || "-"}{" "}
                                         €
@@ -193,7 +200,7 @@ export default function SimulationResults({
                                         Total cost:
                                     </span>
                                     <span className="font-bold text-lg">
-                                        {simulationResults.M1?.total_cost.toFixed(
+                                        {simulationResults.m1?.results.total_cost.toFixed(
                                             2
                                         ) || "-"}{" "}
                                         €
@@ -231,6 +238,12 @@ export default function SimulationResults({
                         </div>
                     </motion.div>
                     <div className="flex flex-col gap-4 w-full h-full">
+                        {simulationResults.m2?.map_html && (
+                            <ResultMapPreview
+                                html={simulationResults.m2.map_html}
+                                className="h-[400px] w-full rounded-lg shadow-sm"
+                            />
+                        )}
                         <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 h-1/3">
                             <h4 className="font-medium text-gray-800 mb-3 flex items-center">
                                 <FaRoute className="mr-2 text-blue-500" />{" "}
@@ -242,7 +255,7 @@ export default function SimulationResults({
                                         Walking:
                                     </span>
                                     <span className="font-medium">
-                                        {simulationResults.M2?.total_kms_walk.toFixed(
+                                        {simulationResults.m2?.results.total_kms_walk.toFixed(
                                             2
                                         ) || "-"}{" "}
                                         km
@@ -253,7 +266,7 @@ export default function SimulationResults({
                                         Driving:
                                     </span>
                                     <span className="font-medium">
-                                        {simulationResults.M2?.total_kms_drive.toFixed(
+                                        {simulationResults.m2?.results.total_kms_drive.toFixed(
                                             2
                                         ) || "-"}{" "}
                                         km
@@ -264,11 +277,11 @@ export default function SimulationResults({
                                         Total:
                                     </span>
                                     <span className="font-medium">
-                                        {simulationResults.M2
+                                        {simulationResults.m2
                                             ? (
-                                                  simulationResults.M2
+                                                  simulationResults.m2.results
                                                       .total_kms_walk +
-                                                  simulationResults.M2
+                                                  simulationResults.m2.results
                                                       .total_kms_drive
                                               ).toFixed(2)
                                             : "-"}{" "}
@@ -289,7 +302,7 @@ export default function SimulationResults({
                                         Walking:
                                     </span>
                                     <span className="font-medium">
-                                        {simulationResults.M2?.total_hours_walk.toFixed(
+                                        {simulationResults.m2?.results.total_hours_walk.toFixed(
                                             2
                                         ) || "-"}{" "}
                                         hours
@@ -300,7 +313,7 @@ export default function SimulationResults({
                                         Driving:
                                     </span>
                                     <span className="font-medium">
-                                        {simulationResults.M2?.total_hours_drive.toFixed(
+                                        {simulationResults.m2?.results.total_hours_drive.toFixed(
                                             2
                                         ) || "-"}{" "}
                                         hours
@@ -311,11 +324,11 @@ export default function SimulationResults({
                                         Total:
                                     </span>
                                     <span className="font-medium">
-                                        {simulationResults.M2
+                                        {simulationResults.m2
                                             ? (
-                                                  simulationResults.M2
+                                                  simulationResults.m2.results
                                                       .total_hours_walk +
-                                                  simulationResults.M2
+                                                  simulationResults.m2.results
                                                       .total_hours_drive
                                               ).toFixed(2)
                                             : "-"}{" "}
@@ -345,7 +358,7 @@ export default function SimulationResults({
                                         Distance cost:
                                     </span>
                                     <span className="font-medium">
-                                        {simulationResults.M2?.distance_cost_ona.toFixed(
+                                        {simulationResults.m2?.results.distance_cost_ona.toFixed(
                                             2
                                         ) || "-"}{" "}
                                         €
@@ -356,7 +369,7 @@ export default function SimulationResults({
                                         Time cost:
                                     </span>
                                     <span className="font-medium">
-                                        {simulationResults.M2?.time_cost_ona.toFixed(
+                                        {simulationResults.m2?.results.time_cost_ona.toFixed(
                                             2
                                         ) || "-"}{" "}
                                         €
@@ -367,7 +380,7 @@ export default function SimulationResults({
                                         Total cost:
                                     </span>
                                     <span className="font-bold text-lg">
-                                        {simulationResults.M2?.total_cost.toFixed(
+                                        {simulationResults.m2?.results.total_cost.toFixed(
                                             2
                                         ) || "-"}{" "}
                                         €

@@ -1,18 +1,24 @@
 import { MapContainer, TileLayer } from "react-leaflet";
 import { GeoJSONWithInteractionsLayer } from "./Layers/GeoJsonWithInteractionsLayer";
 import { cn } from "@/lib/utils";
-import React from "react";
+import React, { useRef } from "react";
 import NeighborhoodsMapMenu from "./Menu";
-import { Neighborhood } from "@/lib/neighborhoods";
+import { Neighborhood, StartPoint, Warehouse } from "@/lib/neighborhoods";
+import NeighborhoodPointsLayer from "./Layers/NeighborhoodPointsLayer";
 
-interface BarrioMapProps {
+interface NeighborhoodsMapProps {
     neighborhoods: Record<string, Neighborhood>;
     selectedNeighborhood: Neighborhood | null;
     setSelectedNeighborhood: React.Dispatch<
         React.SetStateAction<Neighborhood | null>
     >;
     selectedSimulationType: string;
-
+    startPoint?: StartPoint | null;
+    setStartPoint?: React.Dispatch<React.SetStateAction<StartPoint | null>>;
+    selectedWarehouse?: Warehouse | null;
+    setSelectedWarehouse?: React.Dispatch<
+        React.SetStateAction<Warehouse | null>
+    >;
     className?: string;
 }
 
@@ -23,9 +29,15 @@ export function NeighborhoodsMap({
     neighborhoods,
     selectedNeighborhood,
     setSelectedNeighborhood,
+    startPoint,
+    setStartPoint,
+    selectedWarehouse,
+    setSelectedWarehouse,
     selectedSimulationType,
     className,
-}: BarrioMapProps) {
+}: NeighborhoodsMapProps) {
+    const mapRef = useRef<L.Map | null>(null);
+    
     return (
         <div
             className={cn(
@@ -55,6 +67,17 @@ export function NeighborhoodsMap({
                             : "secondary"
                     }
                 />
+                {selectedSimulationType === "interactive" &&
+                    selectedNeighborhood && (
+                        <NeighborhoodPointsLayer
+                            selectedNeighborhood={selectedNeighborhood}
+                            startPoint={startPoint!}
+                            setStartPoint={setStartPoint!}
+                            selectedWarehouse={selectedWarehouse!}
+                            setSelectedWarehouse={setSelectedWarehouse!}
+                            mapRef={mapRef}
+                        />
+                    )}
             </MapContainer>
             <NeighborhoodsMapMenu
                 selectedSimulationType={selectedSimulationType}

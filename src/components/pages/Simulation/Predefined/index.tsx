@@ -29,7 +29,7 @@ import PredefinedTitle from "./Title";
 import SimulationResults from "../common/SimulationResults";
 
 type PredefinedSimulationSelectedResults =
-    ModelsObject<PredefinedSimulationResultRow | null>;
+    ModelsObject<{"results": PredefinedSimulationResultRow | null}>;
 
 export function PredefinedSimulationsTabContent({
     selectedNeighborhood,
@@ -73,8 +73,12 @@ export function PredefinedSimulationsTabContent({
             const m2 = filtered.find((row) => row.modelo === "M2") || null;
 
             setPredefinedSimulationSelectedResults({
-                M1: m1,
-                M2: m2,
+                m1: {
+                    results: m1
+                },
+                m2: {
+                    results: m2
+                },
             });
         }
     }, [
@@ -103,19 +107,20 @@ export function PredefinedSimulationsTabContent({
                         neighborhoods={neighborhoods}
                         selectedNeighborhood={selectedNeighborhood}
                         setSelectedNeighborhood={setSelectedNeighborhood}
-                        selectedSimulationType={"predefined"}
+                        selectedSimulationType="predefined"
                     />
                     <NeighborhoodInfo
                         neighborhood={selectedNeighborhood}
+                        selectedSimulationType="predefined"
                         className="w-1/4"
                     />
                 </div>
             </div>
 
-            <div className="flex flex-col mb-6 bg-gray-50 p-4 rounded-lg shadow-sm">
+            <div className="flex flex-row gap-4 mb-6 bg-gray-50 p-4 rounded-lg shadow-sm">
                 <label
                     htmlFor="packages"
-                    className="flex items-center text-base font-medium text-gray-700 mb-4"
+                    className="flex w-1/5 items-center text-base font-medium text-gray-700"
                 >
                     <FaBoxOpen className="text-primary mr-2" />
                     Number of packages
@@ -126,7 +131,7 @@ export function PredefinedSimulationsTabContent({
                     onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
                         setSelectedPackageQty(parseInt(e.target.value))
                     }
-                    className="interactive-input w-1/2 p-3 bg-white border border-gray-200 rounded-md"
+                    className="interactive-input w-4/5 p-3 bg-white border border-gray-200 rounded-md"
                     disabled={!selectedNeighborhood}
                 >
                     <option key="default-package" value="">
