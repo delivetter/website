@@ -48,7 +48,10 @@ export function GeoJSONWithInteractionsLayer({
                 );
 
                 if (!selectedNeighborhood) {
-                    map.flyTo(MAP_CENTER, MAP_ZOOM, {animate: true, duration: 0.2});
+                    map.flyTo(MAP_CENTER, MAP_ZOOM, {
+                        animate: true,
+                        duration: 0.2,
+                    });
                     return;
                 }
 
@@ -95,6 +98,14 @@ export function GeoJSONWithInteractionsLayer({
                 opacity: 0.9,
                 className: "leaflet-tooltip-own", // <- still CSS-based
             });
+
+            if (name === selectedNeighborhood?.barrio) {
+                map.fitBounds(layer.getBounds(), {
+                    padding: [20, 20],
+                    maxZoom: 16,
+                    animate: true,
+                });
+            }
         },
         [selectedNeighborhood, onSelectNeighborhood, styles]
     );
