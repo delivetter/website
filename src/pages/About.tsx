@@ -206,27 +206,12 @@ export default function About() {
             />
             <AvatarWithText
               upperText="Anna Aparici Nogués"
-              imgSrc={imgAnna} 
+              imgSrc={imgDani} 
               className="object-bottom"
             />
             <AvatarWithText
               upperText="José Milán Server"
               imgSrc={imgJosete}
-              className="object-bottom"
-            />
-            <AvatarWithText
-              upperText="Joel Moncho Mas"
-              imgSrc={imgJoel}
-              className="object-bottom"
-            />
-            <AvatarWithText
-              upperText="Juanjo Prades García"
-              imgSrc={imgJuanjo}
-              className="object-bottom"
-            />
-            <AvatarWithText
-              upperText="Daniel Reinón García"
-              imgSrc={imgDani}
               className="object-bottom"
             />
           </div>
