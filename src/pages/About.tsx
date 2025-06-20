@@ -198,20 +198,26 @@ export default function About() {
             DELIVETTER was created by a multidisciplinary team of Data Science
             students from Universitat Politècnica de València:
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 justify-items-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 justify-items-center">
             <AvatarWithText
               upperText="José Aguilar Camps"
               imgSrc={imgJose}
               className="object-bottom"
             />
             <AvatarWithText
-              upperText="Anna Aparici Nogués"
+              upperText="Daniel Reinón García"
               imgSrc={imgDani} 
               className="object-bottom"
             />
             <AvatarWithText
               upperText="José Milán Server"
               imgSrc={imgJosete}
+              className="object-bottom"
+            />
+
+            <AvatarWithText
+              upperText="Joel Moncho Mas"
+              imgSrc={imgJoel}
               className="object-bottom"
             />
           </div>
