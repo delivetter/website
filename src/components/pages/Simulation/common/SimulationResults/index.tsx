@@ -66,151 +66,160 @@ export default function SimulationResults({
                                 className="h-[400px] w-full rounded-lg shadow-sm"
                             />
                         )}
-                        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 h-1/3">
-                            <h4 className="font-medium text-gray-800 mb-3 flex items-center">
-                                <FaRoute className="mr-2 text-blue-500" />{" "}
-                                Distance Metrics
-                            </h4>
-                            <div className="space-y-3">
-                                <div className="flex justify-between items-center">
-                                    <span className="text-sm text-gray-600">
-                                        Walking:
-                                    </span>
-                                    <span className="font-medium">
-                                        {simulationResults.m1?.results.total_kms_walk.toFixed(
-                                            2
-                                        ) || "-"}{" "}
-                                        km
-                                    </span>
+                        {simulationResults.m1?.results && (
+                            <>
+                                <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 h-1/3">
+                                    <h4 className="font-medium text-gray-800 mb-3 flex items-center">
+                                        <FaRoute className="mr-2 text-blue-500" />{" "}
+                                        Distance Metrics
+                                    </h4>
+                                    <div className="space-y-3">
+                                        <div className="flex justify-between items-center">
+                                            <span className="text-sm text-gray-600">
+                                                Walking:
+                                            </span>
+                                            <span className="font-medium">
+                                                {simulationResults.m1?.results.total_kms_walk.toFixed(
+                                                    2
+                                                ) || "-"}{" "}
+                                                km
+                                            </span>
+                                        </div>
+                                        <div className="flex justify-between items-center">
+                                            <span className="text-sm text-gray-600">
+                                                Driving:
+                                            </span>
+                                            <span className="font-medium">
+                                                {simulationResults.m1?.results.total_kms_drive.toFixed(
+                                                    2
+                                                ) || "-"}{" "}
+                                                km
+                                            </span>
+                                        </div>
+                                        <div className="flex justify-between items-center pt-2 border-t border-dashed border-gray-200">
+                                            <span className="text-sm text-gray-600">
+                                                Total:
+                                            </span>
+                                            <span className="font-medium">
+                                                {simulationResults.m1
+                                                    ? (
+                                                          simulationResults.m1
+                                                              .results
+                                                              .total_kms_walk +
+                                                          simulationResults.m1
+                                                              .results
+                                                              .total_kms_drive
+                                                      ).toFixed(2)
+                                                    : "-"}{" "}
+                                                km
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="flex justify-between items-center">
-                                    <span className="text-sm text-gray-600">
-                                        Driving:
-                                    </span>
-                                    <span className="font-medium">
-                                        {simulationResults.m1?.results.total_kms_drive.toFixed(
-                                            2
-                                        ) || "-"}{" "}
-                                        km
-                                    </span>
+                                <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 h-1/3">
+                                    <h4 className="font-medium text-gray-800 mb-3 flex items-center">
+                                        <FaClock className="mr-2 text-purple-500" />{" "}
+                                        Time Metrics
+                                    </h4>
+                                    <div className="space-y-3">
+                                        <div className="flex justify-between items-center">
+                                            <span className="text-sm text-gray-600">
+                                                Walking:
+                                            </span>
+                                            <span className="font-medium">
+                                                {simulationResults.m1?.results.total_hours_walk.toFixed(
+                                                    2
+                                                ) || "-"}{" "}
+                                                hours
+                                            </span>
+                                        </div>
+                                        <div className="flex justify-between items-center">
+                                            <span className="text-sm text-gray-600">
+                                                Driving:
+                                            </span>
+                                            <span className="font-medium">
+                                                {simulationResults.m1?.results.total_hours_drive.toFixed(
+                                                    2
+                                                ) || "-"}{" "}
+                                                hours
+                                            </span>
+                                        </div>
+                                        <div className="flex justify-between items-center pt-2 border-t border-dashed border-gray-200">
+                                            <span className="text-sm text-gray-600">
+                                                Total:
+                                            </span>
+                                            <span className="font-medium">
+                                                {simulationResults.m1
+                                                    ? (
+                                                          simulationResults.m1
+                                                              .results
+                                                              .total_hours_walk +
+                                                          simulationResults.m1
+                                                              .results
+                                                              .total_hours_drive
+                                                      ).toFixed(2)
+                                                    : "-"}{" "}
+                                                hours
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="flex justify-between items-center pt-2 border-t border-dashed border-gray-200">
-                                    <span className="text-sm text-gray-600">
-                                        Total:
-                                    </span>
-                                    <span className="font-medium">
-                                        {simulationResults.m1
-                                            ? (
-                                                  simulationResults.m1.results
-                                                      .total_kms_walk +
-                                                  simulationResults.m1.results
-                                                      .total_kms_drive
-                                              ).toFixed(2)
-                                            : "-"}{" "}
-                                        km
-                                    </span>
+                                <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 h-1/3">
+                                    <div className="flex justify-between items-center mb-3">
+                                        <h4 className="font-medium text-gray-800 flex items-center">
+                                            <FaMoneyBillWave className="mr-2 text-green-500" />{" "}
+                                            Cost Metrics
+                                        </h4>
+                                        <Link
+                                            to="/comparison"
+                                            className="flex items-center text-sm text-primary hover:text-blue-700 transition-colors"
+                                            title="View detailed cost breakdown"
+                                        >
+                                            <FaInfo className="mr-1" /> Details
+                                            of costs
+                                        </Link>
+                                    </div>
+                                    <div className="space-y-3">
+                                        <div className="flex justify-between items-center">
+                                            <span className="text-sm text-gray-600">
+                                                Distance cost:
+                                            </span>
+                                            <span className="font-medium">
+                                                {simulationResults.m1?.results.distance_cost_van.toFixed(
+                                                    2
+                                                ) || "-"}{" "}
+                                                €
+                                            </span>
+                                        </div>
+                                        <div className="flex justify-between items-center">
+                                            <span className="text-sm text-gray-600">
+                                                Time cost:
+                                            </span>
+                                            <span className="font-medium">
+                                                {simulationResults.m1?.results.time_cost_van.toFixed(
+                                                    2
+                                                ) || "-"}{" "}
+                                                €
+                                            </span>
+                                        </div>
+                                        <div className="flex justify-between items-center pt-2 border-t border-dashed border-gray-200">
+                                            <span className="text-sm text-gray-600">
+                                                Total cost:
+                                            </span>
+                                            <span className="font-bold text-lg">
+                                                {simulationResults.m1?.results.total_cost.toFixed(
+                                                    2
+                                                ) || "-"}{" "}
+                                                €
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 h-1/3">
-                            <h4 className="font-medium text-gray-800 mb-3 flex items-center">
-                                <FaClock className="mr-2 text-purple-500" />{" "}
-                                Time Metrics
-                            </h4>
-                            <div className="space-y-3">
-                                <div className="flex justify-between items-center">
-                                    <span className="text-sm text-gray-600">
-                                        Walking:
-                                    </span>
-                                    <span className="font-medium">
-                                        {simulationResults.m1?.results.total_hours_walk.toFixed(
-                                            2
-                                        ) || "-"}{" "}
-                                        hours
-                                    </span>
-                                </div>
-                                <div className="flex justify-between items-center">
-                                    <span className="text-sm text-gray-600">
-                                        Driving:
-                                    </span>
-                                    <span className="font-medium">
-                                        {simulationResults.m1?.results.total_hours_drive.toFixed(
-                                            2
-                                        ) || "-"}{" "}
-                                        hours
-                                    </span>
-                                </div>
-                                <div className="flex justify-between items-center pt-2 border-t border-dashed border-gray-200">
-                                    <span className="text-sm text-gray-600">
-                                        Total:
-                                    </span>
-                                    <span className="font-medium">
-                                        {simulationResults.m1
-                                            ? (
-                                                  simulationResults.m1.results
-                                                      .total_hours_walk +
-                                                  simulationResults.m1.results
-                                                      .total_hours_drive
-                                              ).toFixed(2)
-                                            : "-"}{" "}
-                                        hours
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 h-1/3">
-                            <div className="flex justify-between items-center mb-3">
-                                <h4 className="font-medium text-gray-800 flex items-center">
-                                    <FaMoneyBillWave className="mr-2 text-green-500" />{" "}
-                                    Cost Metrics
-                                </h4>
-                                <Link
-                                    to="/comparison"
-                                    className="flex items-center text-sm text-primary hover:text-blue-700 transition-colors"
-                                    title="View detailed cost breakdown"
-                                >
-                                    <FaInfo className="mr-1" /> Details of costs
-                                </Link>
-                            </div>
-                            <div className="space-y-3">
-                                <div className="flex justify-between items-center">
-                                    <span className="text-sm text-gray-600">
-                                        Distance cost:
-                                    </span>
-                                    <span className="font-medium">
-                                        {simulationResults.m1?.results.distance_cost_van.toFixed(
-                                            2
-                                        ) || "-"}{" "}
-                                        €
-                                    </span>
-                                </div>
-                                <div className="flex justify-between items-center">
-                                    <span className="text-sm text-gray-600">
-                                        Time cost:
-                                    </span>
-                                    <span className="font-medium">
-                                        {simulationResults.m1?.results.time_cost_van.toFixed(
-                                            2
-                                        ) || "-"}{" "}
-                                        €
-                                    </span>
-                                </div>
-                                <div className="flex justify-between items-center pt-2 border-t border-dashed border-gray-200">
-                                    <span className="text-sm text-gray-600">
-                                        Total cost:
-                                    </span>
-                                    <span className="font-bold text-lg">
-                                        {simulationResults.m1?.results.total_cost.toFixed(
-                                            2
-                                        ) || "-"}{" "}
-                                        €
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+                            </>
+                        )}
                     </div>
                 </div>
-
+                {}
                 <div className="flex flex-col gap-4 bg-gradient-to-r from-blue-500 to-purple-500 px-4 py-5 rounded-lg shadow-sm border border-gray-100 w-1/2 items-center h-min">
                     <motion.div
                         className="flex gap-5 justify-start w-full mb-2 ml-1"
@@ -244,150 +253,157 @@ export default function SimulationResults({
                                 className="h-[400px] w-full rounded-lg shadow-sm"
                             />
                         )}
-                        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 h-1/3">
-                            <h4 className="font-medium text-gray-800 mb-3 flex items-center">
-                                <FaRoute className="mr-2 text-blue-500" />{" "}
-                                Distance Metrics
-                            </h4>
-                            <div className="space-y-3">
-                                <div className="flex justify-between items-center">
-                                    <span className="text-sm text-gray-600">
-                                        Walking:
-                                    </span>
-                                    <span className="font-medium">
-                                        {simulationResults.m2?.results.total_kms_walk.toFixed(
-                                            2
-                                        ) || "-"}{" "}
-                                        km
-                                    </span>
+                        {simulationResults.m2?.results && (
+                            <>
+                                <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 h-1/3">
+                                    <h4 className="font-medium text-gray-800 mb-3 flex items-center">
+                                        <FaRoute className="mr-2 text-blue-500" />{" "}
+                                        Distance Metrics
+                                    </h4>
+                                    <div className="space-y-3">
+                                        <div className="flex justify-between items-center">
+                                            <span className="text-sm text-gray-600">
+                                                Walking:
+                                            </span>
+                                            <span className="font-medium">
+                                                {simulationResults.m2?.results.total_kms_walk.toFixed(
+                                                    2
+                                                ) || "-"}{" "}
+                                                km
+                                            </span>
+                                        </div>
+                                        <div className="flex justify-between items-center">
+                                            <span className="text-sm text-gray-600">
+                                                Driving:
+                                            </span>
+                                            <span className="font-medium">
+                                                {simulationResults.m2?.results.total_kms_drive.toFixed(
+                                                    2
+                                                ) || "-"}{" "}
+                                                km
+                                            </span>
+                                        </div>
+                                        <div className="flex justify-between items-center pt-2 border-t border-dashed border-gray-200">
+                                            <span className="text-sm text-gray-600">
+                                                Total:
+                                            </span>
+                                            <span className="font-medium">
+                                                {simulationResults.m2
+                                                    ? (
+                                                          simulationResults.m2
+                                                              .results
+                                                              .total_kms_walk +
+                                                          simulationResults.m2
+                                                              .results
+                                                              .total_kms_drive
+                                                      ).toFixed(2)
+                                                    : "-"}{" "}
+                                                km
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="flex justify-between items-center">
-                                    <span className="text-sm text-gray-600">
-                                        Driving:
-                                    </span>
-                                    <span className="font-medium">
-                                        {simulationResults.m2?.results.total_kms_drive.toFixed(
-                                            2
-                                        ) || "-"}{" "}
-                                        km
-                                    </span>
+                                <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 h-1/3">
+                                    <h4 className="font-medium text-gray-800 mb-3 flex items-center">
+                                        <FaClock className="mr-2 text-purple-500" />{" "}
+                                        Time Metrics
+                                    </h4>
+                                    <div className="space-y-3">
+                                        <div className="flex justify-between items-center">
+                                            <span className="text-sm text-gray-600">
+                                                Walking:
+                                            </span>
+                                            <span className="font-medium">
+                                                {simulationResults.m2?.results.total_hours_walk.toFixed(
+                                                    2
+                                                ) || "-"}{" "}
+                                                hours
+                                            </span>
+                                        </div>
+                                        <div className="flex justify-between items-center">
+                                            <span className="text-sm text-gray-600">
+                                                Driving:
+                                            </span>
+                                            <span className="font-medium">
+                                                {simulationResults.m2?.results.total_hours_drive.toFixed(
+                                                    2
+                                                ) || "-"}{" "}
+                                                hours
+                                            </span>
+                                        </div>
+                                        <div className="flex justify-between items-center pt-2 border-t border-dashed border-gray-200">
+                                            <span className="text-sm text-gray-600">
+                                                Total:
+                                            </span>
+                                            <span className="font-medium">
+                                                {simulationResults.m2
+                                                    ? (
+                                                          simulationResults.m2
+                                                              .results
+                                                              .total_hours_walk +
+                                                          simulationResults.m2
+                                                              .results
+                                                              .total_hours_drive
+                                                      ).toFixed(2)
+                                                    : "-"}{" "}
+                                                hours
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="flex justify-between items-center pt-2 border-t border-dashed border-gray-200">
-                                    <span className="text-sm text-gray-600">
-                                        Total:
-                                    </span>
-                                    <span className="font-medium">
-                                        {simulationResults.m2
-                                            ? (
-                                                  simulationResults.m2.results
-                                                      .total_kms_walk +
-                                                  simulationResults.m2.results
-                                                      .total_kms_drive
-                                              ).toFixed(2)
-                                            : "-"}{" "}
-                                        km
-                                    </span>
+                                <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 h-1/3">
+                                    <div className="flex justify-between items-center mb-3">
+                                        <h4 className="font-medium text-gray-800 flex items-center">
+                                            <FaMoneyBillWave className="mr-2 text-green-500" />{" "}
+                                            Cost Metrics
+                                        </h4>
+                                        <Link
+                                            to="/comparison"
+                                            className="flex items-center text-sm text-primary hover:text-blue-700 transition-colors"
+                                            title="View detailed cost breakdown"
+                                        >
+                                            <FaInfo className="mr-1" /> Details
+                                            of costs
+                                        </Link>
+                                    </div>
+                                    <div className="space-y-3">
+                                        <div className="flex justify-between items-center">
+                                            <span className="text-sm text-gray-600">
+                                                Distance cost:
+                                            </span>
+                                            <span className="font-medium">
+                                                {simulationResults.m2?.results.distance_cost_ona.toFixed(
+                                                    2
+                                                ) || "-"}{" "}
+                                                €
+                                            </span>
+                                        </div>
+                                        <div className="flex justify-between items-center">
+                                            <span className="text-sm text-gray-600">
+                                                Time cost:
+                                            </span>
+                                            <span className="font-medium">
+                                                {simulationResults.m2?.results.time_cost_ona.toFixed(
+                                                    2
+                                                ) || "-"}{" "}
+                                                €
+                                            </span>
+                                        </div>
+                                        <div className="flex justify-between items-center pt-2 border-t border-dashed border-gray-200">
+                                            <span className="text-sm text-gray-600">
+                                                Total cost:
+                                            </span>
+                                            <span className="font-bold text-lg">
+                                                {simulationResults.m2?.results.total_cost.toFixed(
+                                                    2
+                                                ) || "-"}{" "}
+                                                €
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-
-                        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 h-1/3">
-                            <h4 className="font-medium text-gray-800 mb-3 flex items-center">
-                                <FaClock className="mr-2 text-purple-500" />{" "}
-                                Time Metrics
-                            </h4>
-                            <div className="space-y-3">
-                                <div className="flex justify-between items-center">
-                                    <span className="text-sm text-gray-600">
-                                        Walking:
-                                    </span>
-                                    <span className="font-medium">
-                                        {simulationResults.m2?.results.total_hours_walk.toFixed(
-                                            2
-                                        ) || "-"}{" "}
-                                        hours
-                                    </span>
-                                </div>
-                                <div className="flex justify-between items-center">
-                                    <span className="text-sm text-gray-600">
-                                        Driving:
-                                    </span>
-                                    <span className="font-medium">
-                                        {simulationResults.m2?.results.total_hours_drive.toFixed(
-                                            2
-                                        ) || "-"}{" "}
-                                        hours
-                                    </span>
-                                </div>
-                                <div className="flex justify-between items-center pt-2 border-t border-dashed border-gray-200">
-                                    <span className="text-sm text-gray-600">
-                                        Total:
-                                    </span>
-                                    <span className="font-medium">
-                                        {simulationResults.m2
-                                            ? (
-                                                  simulationResults.m2.results
-                                                      .total_hours_walk +
-                                                  simulationResults.m2.results
-                                                      .total_hours_drive
-                                              ).toFixed(2)
-                                            : "-"}{" "}
-                                        hours
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 h-1/3">
-                            <div className="flex justify-between items-center mb-3">
-                                <h4 className="font-medium text-gray-800 flex items-center">
-                                    <FaMoneyBillWave className="mr-2 text-green-500" />{" "}
-                                    Cost Metrics
-                                </h4>
-                                <Link
-                                    to="/comparison"
-                                    className="flex items-center text-sm text-primary hover:text-blue-700 transition-colors"
-                                    title="View detailed cost breakdown"
-                                >
-                                    <FaInfo className="mr-1" /> Details of costs
-                                </Link>
-                            </div>
-                            <div className="space-y-3">
-                                <div className="flex justify-between items-center">
-                                    <span className="text-sm text-gray-600">
-                                        Distance cost:
-                                    </span>
-                                    <span className="font-medium">
-                                        {simulationResults.m2?.results.distance_cost_ona.toFixed(
-                                            2
-                                        ) || "-"}{" "}
-                                        €
-                                    </span>
-                                </div>
-                                <div className="flex justify-between items-center">
-                                    <span className="text-sm text-gray-600">
-                                        Time cost:
-                                    </span>
-                                    <span className="font-medium">
-                                        {simulationResults.m2?.results.time_cost_ona.toFixed(
-                                            2
-                                        ) || "-"}{" "}
-                                        €
-                                    </span>
-                                </div>
-                                <div className="flex justify-between items-center pt-2 border-t border-dashed border-gray-200">
-                                    <span className="text-sm text-gray-600">
-                                        Total cost:
-                                    </span>
-                                    <span className="font-bold text-lg">
-                                        {simulationResults.m2?.results.total_cost.toFixed(
-                                            2
-                                        ) || "-"}{" "}
-                                        €
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+                            </>
+                        )}
                     </div>
                 </div>
             </div>

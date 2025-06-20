@@ -12,8 +12,6 @@ import { StartPoint, Warehouse } from "@/lib/neighborhoods";
 import { simulate, SimulateOutput } from "@/lib/api/simulate";
 import InteractiveTitle from "./Title";
 import NeighborhoodInfo from "../common/NeighborhoodInfo";
-import { Badge } from "@/components/ui/badge";
-import { Info } from "lucide-react";
 import MapLegend from "./MapLegend";
 import SimulationResults from "../common/SimulationResults";
 
@@ -23,6 +21,7 @@ export function InteractiveSimulationsTabContent({
     selectedPackageQty,
     setSelectedPackageQty,
     neighborhoods,
+    selectedSimulationType,
 }: SimulationsTabContentProps) {
     const [isLoading, setIsLoading] = useState(false);
 
@@ -37,7 +36,7 @@ export function InteractiveSimulationsTabContent({
         setStartPoint(null);
         setSelectedWarehouse(null);
         setSimulationResult(null);
-    }, [selectedNeighborhood]);
+    }, [selectedNeighborhood, selectedSimulationType]);
 
     return (
         <TabsContent

@@ -1,29 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Link } from "wouter";
-import {
-    FaInfo,
-    FaRoute,
-    FaPlayCircle,
-    FaChartLine,
-    FaExclamationTriangle,
-} from "react-icons/fa";
+import { FaRoute, FaPlayCircle } from "react-icons/fa";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import "leaflet/dist/leaflet.css";
 import { PredefinedSimulationsTabContent } from "@/components/pages/Simulation/Predefined";
-import {
-    getNeighborhoods,
-    Neighborhood,
-    StartPoint,
-    Warehouse,
-} from "@/lib/neighborhoods";
+import { getNeighborhoods, Neighborhood } from "@/lib/neighborhoods";
 import { InteractiveSimulationsTabContent } from "@/components/pages/Simulation/Interactive";
-import { NeighborhoodsMap } from "@/components/pages/Simulation/common/NeighborhoodsMap";
 import { cn } from "@/lib/utils";
-import MiniBarrioMap from "@/components/pages/Simulation/Interactive/MiniBarrioMap";
 import Title from "@/components/layout/Title";
-import NeighborhoodInfo from "@/components/pages/Simulation/common/NeighborhoodInfo";
 
 export default function Simulation() {
     const [neighborhoods, setNeighborhoods] = useState<
@@ -94,9 +79,9 @@ export default function Simulation() {
                             Interactive Simulation
                         </TabsTrigger>
                     </TabsList>
-                    
 
                     <PredefinedSimulationsTabContent
+                        selectedSimulationType={selectedSimulationType}
                         selectedNeighborhood={selectedNeighborhood}
                         setSelectedNeighborhood={setSelectedNeighborhood}
                         selectedPackageQty={selectedPackageQty}
@@ -104,6 +89,7 @@ export default function Simulation() {
                         neighborhoods={neighborhoods}
                     />
                     <InteractiveSimulationsTabContent
+                        selectedSimulationType={selectedSimulationType}
                         selectedNeighborhood={selectedNeighborhood}
                         setSelectedNeighborhood={setSelectedNeighborhood}
                         selectedPackageQty={selectedPackageQty}

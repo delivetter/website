@@ -6,4 +6,5 @@ export interface SimulationsTabContentProps {
     selectedPackageQty: number | null;
     setSelectedPackageQty: React.Dispatch<React.SetStateAction<number | null>>;
     neighborhoods: Record<string, Neighborhood>;
+    selectedSimulationType: string;
 }

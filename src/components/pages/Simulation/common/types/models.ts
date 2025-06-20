@@ -16,6 +16,6 @@ export type SimulationResults = {
 };
 
 export type ModelsSimulationResults = ModelsObject<{
-    results: SimulationResults;
+    results: SimulationResults | null;
     map_html?: string;
 } | null>;

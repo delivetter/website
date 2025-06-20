@@ -2,34 +2,21 @@ import { TabsContent } from "@/components/ui/tabs";
 import { NeighborhoodsMap } from "../common/NeighborhoodsMap";
 import {
     FaBoxOpen,
-    FaClock,
-    FaInfo,
     FaMapMarkerAlt,
-    FaMoneyBillWave,
-    FaRobot,
-    FaRoute,
-    FaShoppingCart,
-    FaTruck,
-    FaWarehouse,
 } from "react-icons/fa";
-import { LoadingData } from "../../common/LoadingData";
 import React, { useEffect, useState } from "react";
 import {
     PredefinedSimulationResultRow,
     predefinedSimulationsResultsPromise,
 } from "@/lib/data/predefinedSimulationsResults";
 import { ModelsObject } from "../common/types/models";
-import { motion } from "framer-motion";
-import { Link } from "wouter";
 import { SimulationsTabContentProps } from "../common/types/props";
-import { Badge } from "@/components/ui/badge";
-import { Info } from "lucide-react";
 import NeighborhoodInfo from "../common/NeighborhoodInfo";
 import PredefinedTitle from "./Title";
 import SimulationResults from "../common/SimulationResults";
 
 type PredefinedSimulationSelectedResults =
-    ModelsObject<{"results": PredefinedSimulationResultRow | null}>;
+    ModelsObject<{"results": PredefinedSimulationResultRow | null}> | null;
 
 export function PredefinedSimulationsTabContent({
     selectedNeighborhood,
@@ -37,6 +24,7 @@ export function PredefinedSimulationsTabContent({
     selectedPackageQty,
     setSelectedPackageQty,
     neighborhoods,
+    selectedSimulationType,
 }: SimulationsTabContentProps) {
     const [predefinedSimulationsResults, setPredefinedSimulationsResults] =
         useState<PredefinedSimulationResultRow[] | null>(null);
@@ -55,7 +43,7 @@ export function PredefinedSimulationsTabContent({
     useEffect(() => {
         setSelectedPackageQty(null);
         setPredefinedSimulationSelectedResults(null);
-    }, [selectedNeighborhood]);
+    }, [selectedNeighborhood, selectedSimulationType]);
 
     useEffect(() => {
         if (
@@ -147,7 +135,6 @@ export function PredefinedSimulationsTabContent({
                     ))}
                 </select>
             </div>
-
             {predefinedSimulationSelectedResults ? (
                 <SimulationResults
                     simulationResults={predefinedSimulationSelectedResults}
